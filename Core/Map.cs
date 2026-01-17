@@ -62,7 +62,7 @@ public class Map : Scene
 
     }
 
-    public override void Draw(SpriteBatch spriteBatch)
+    public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
     {
         foreach (TmxLayer layer in _map.Layers)
         {

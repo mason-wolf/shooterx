@@ -13,7 +13,7 @@ public class TestScene : Scene
     public override void LoadContent()
     {
         _font = Game.Content.Load<SpriteFont>("Munro");
-        _player = new Player(Game.GraphicsDevice, new Vector2(10, 10));
+        _player = new Player(Game.GraphicsDevice, new Vector2(50, 50));
         _map = new Map(Game);
         _map.LoadMap("Content/test-map.tmx", "tileset.png", _player);
       //  _map.SpawnEnemies(Game.GraphicsDevice);
@@ -28,10 +28,10 @@ public class TestScene : Scene
         _camera.Update(gameTime);
     }
 
-    public override void Draw(SpriteBatch spriteBatch)
+    public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
     {
         spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: _camera.GetViewMatrix());
-        _map.Draw(spriteBatch);
+        _map.Draw(spriteBatch, gameTime);
         _player.Draw(spriteBatch);
         spriteBatch.End();
     }

@@ -39,7 +39,7 @@ public class Game1 : Game
     protected override void Draw(GameTime gameTime)
     {
         GraphicsDevice.Clear(Color.Black);
-        GameState.CurrentScene?.Draw(_spriteBatch);
+        GameState.CurrentScene?.Draw(_spriteBatch, gameTime);
         base.Draw(gameTime);
     }
 }

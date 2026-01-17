@@ -9,5 +9,5 @@ public abstract class Scene
     public virtual void LoadContent() { }
     public virtual void UnloadContent() { }
     public virtual void Update(GameTime gameTime) { }
-    public virtual void Draw(SpriteBatch spriteBatch) { }
+    public virtual void Draw(SpriteBatch spriteBatch, GameTime gameTime) { }
 }
