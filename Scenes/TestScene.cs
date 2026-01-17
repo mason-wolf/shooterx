@@ -14,7 +14,7 @@ public class TestScene : Scene
     {
         _font = Game.Content.Load<SpriteFont>("Munro");
          _map = new TmxMap("Content/test-map.tmx");
-        _tileset = Game.Content.Load<Texture2D>("wood_tileset.png");
+        _tileset = Game.Content.Load<Texture2D>("tileset.png");
         _player = new Player(Game.GraphicsDevice, new Vector2(10, 10));
         _camera = new Camera(Game.GraphicsDevice.Viewport);
     }
