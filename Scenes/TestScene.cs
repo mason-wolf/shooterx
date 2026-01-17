@@ -6,6 +6,8 @@ public class TestScene : Scene
     SpriteFont _font;
     TmxMap _map;
     Texture2D _tileset;
+    private Player _player;
+    private Camera _camera;
     public TestScene(Game game) : base(game) { }
 
     public override void LoadContent()
@@ -13,14 +15,19 @@ public class TestScene : Scene
         _font = Game.Content.Load<SpriteFont>("Munro");
          _map = new TmxMap("Content/test-map.tmx");
         _tileset = Game.Content.Load<Texture2D>("wood_tileset.png");
+        _player = new Player(Game.GraphicsDevice, new Vector2(10, 10));
+        _camera = new Camera(Game.GraphicsDevice.Viewport);
     }
     public override void Update(GameTime gameTime)
     {
+        _player.Update(gameTime);
+        _camera.SetTarget(_player.Position + new Vector2(16,16));
+        _camera.Update(gameTime);
     }
 
     public override void Draw(SpriteBatch spriteBatch)
     {
-        spriteBatch.Begin(samplerState: SamplerState.PointClamp);
+        spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: _camera.GetViewMatrix());
 
         foreach (TmxLayer layer in _map.Layers)
         {
@@ -45,6 +52,7 @@ public class TestScene : Scene
             }
         }
 
+        _player.Draw(spriteBatch);
         spriteBatch.End();
     }
 }
