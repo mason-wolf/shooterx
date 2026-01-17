@@ -10,6 +10,7 @@ public class MenuScene : Scene
 
     public override void LoadContent()
     {
+        // TODO: Need to load this only once.
         _font = Game.Content.Load<SpriteFont>("Munro");
     }
     public override void Update(GameTime gameTime)

@@ -5,8 +5,10 @@
   <Config />
   <SourceFiles>
     <File>/home/mason/projects/shooterx/Content/Munro.spritefont</File>
+    <File>/home/mason/projects/shooterx/Content/wood_tileset.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
   </DestFiles>
 </SourceFileCollection>
