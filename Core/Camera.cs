@@ -17,6 +17,7 @@ public class Camera
     public void Update(GameTime gameTime)
     {
         float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
         Position = Vector2.Lerp(Position, target, MathHelper.Clamp(lerpSpeed * delta, 0f, 1f));
     }
 

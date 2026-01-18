@@ -28,7 +28,7 @@
     <PackageReference Include="TiledSharp" Version="1.0.1" />
   </ItemGroup>
   <ItemGroup>
-  <None Include="Content\test-map.tmx">
+  <None Include="Content\*.tmx">
     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
   </None>
   <None Include="Content\*.png">

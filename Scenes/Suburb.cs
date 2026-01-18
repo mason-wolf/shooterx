@@ -1,0 +1,61 @@
+using System;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using TiledSharp;
+public class Suburb : Scene
+{
+    private SpriteFont _font;
+    private Map _map;
+    private Player _player;
+    private Camera _camera;
+    private Vector2 _startPosition;
+
+    public Suburb(Game game, Vector2 startPosition) : base(game)
+    {
+        _startPosition = startPosition;
+    }
+
+    public override void LoadContent()
+    {
+        _font = GameState.Font;
+        _player = new Player(Game.GraphicsDevice, _startPosition);
+        _map = new Map(Game);
+        _map.LoadMap("Content/suburb.tmx", "tileset.png", _player);
+        TransitionManager.Initialize(Game.GraphicsDevice);
+        //  _map.SpawnEnemies(Game.GraphicsDevice);
+        _camera = new Camera(Game.GraphicsDevice.Viewport);
+    }
+
+    public override void Update(GameTime gameTime)
+    {
+        _player.Update(gameTime);
+        _map.Update(gameTime);
+        _camera.SetTarget(_player.Position + new Vector2(16, 16));
+        _camera.Update(gameTime);
+
+        if (TransitionManager.IsActive)
+        {
+            TransitionManager.Update(gameTime);
+            return;
+        }
+
+        new TeleportBuilder()
+            .SetGameTime(gameTime)
+            .SetTeleporterName("cabin")
+            .SetPlayer(_player)
+            .SetCamera(_camera)
+            .SetScene(new Cabin(Game, _player, _camera))
+            .SetStartingPosition(new Vector2(422, 600))
+            .Execute();
+    }
+
+    public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
+    {
+        spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: _camera.GetViewMatrix());
+        _map.Draw(spriteBatch, gameTime);
+        _player.Draw(spriteBatch);
+        TransitionManager.Draw(spriteBatch, new Rectangle(0, 0, 1920, 1080));
+        DebugOverlay.Draw(spriteBatch, _player.Position);
+        spriteBatch.End();
+    }
+}

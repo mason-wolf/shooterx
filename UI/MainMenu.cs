@@ -10,14 +10,14 @@ public class MenuScene : Scene
 
     public override void LoadContent()
     {
-        // TODO: Need to load this only once.
         _font = Game.Content.Load<SpriteFont>("Munro");
+        GameState.Font = _font;
     }
     public override void Update(GameTime gameTime)
     {
         if (Keyboard.GetState().IsKeyDown(Keys.Enter))
         {
-            GameState.ChangeScene(new TestScene(Game));
+            GameState.ChangeScene(new Suburb(Game, new Vector2(50, 50)));
         }
     }
 

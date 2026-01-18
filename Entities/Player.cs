@@ -46,10 +46,12 @@ public class Player
         float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
         Vector2 velocity = Vector2.Zero;
         var keyboard = Keyboard.GetState();
+
         if (keyboard.IsKeyDown(Keys.A)) velocity.X -= 1;
         if (keyboard.IsKeyDown(Keys.D)) velocity.X += 1;
         if (keyboard.IsKeyDown(Keys.W)) velocity.Y -= 1;
         if (keyboard.IsKeyDown(Keys.S)) velocity.Y += 1;
+
         if (velocity.LengthSquared() > 0)
         {
             velocity.Normalize();
