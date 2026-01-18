@@ -39,6 +39,8 @@ public class Cabin : Scene
             .SetPlayer(_player)
             .SetCamera(_camera)
             .SetStartingPosition(new Vector2(100, 100))
+            // Wouldn't normally provide another starting position here,
+            // but since its the first scene loaded it needs it.
             .SetScene(new Suburb(Game, new Vector2(100, 100)))
             .Execute();
     }
@@ -48,7 +50,7 @@ public class Cabin : Scene
         spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: _camera.GetViewMatrix());
         _map.Draw(spriteBatch, gameTime);
         _player.Draw(spriteBatch);
-        DebugOverlay.Draw(spriteBatch, _player.Position);
+        TransitionManager.Draw(spriteBatch, new Rectangle(0, 0, 1920, 1080));
         spriteBatch.End();
     }
 }
