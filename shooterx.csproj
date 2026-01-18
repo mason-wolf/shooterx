@@ -31,6 +31,9 @@
   <None Include="Content\*.tmx">
     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
   </None>
+    <None Include="Content\*.tsx">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </None>
   <None Include="Content\*.png">
     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
   </None>

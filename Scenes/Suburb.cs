@@ -57,7 +57,7 @@ public class Suburb : Scene
         spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: _camera.GetViewMatrix());
         _map.Draw(spriteBatch, gameTime);
         _player.Draw(spriteBatch);
-
+        DebugOverlay.Draw(spriteBatch, _player.Position);
         TransitionManager.Draw(spriteBatch, new Rectangle(0, 0, 1920, 1080));
         _dialog.Draw(spriteBatch, gameTime);
 
