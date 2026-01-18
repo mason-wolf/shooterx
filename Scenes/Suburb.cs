@@ -53,6 +53,7 @@ public class Suburb : Scene
 
     public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
     {
+        
         spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: _camera.GetViewMatrix());
         _map.Draw(spriteBatch, gameTime);
         _player.Draw(spriteBatch);

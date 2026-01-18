@@ -11,12 +11,13 @@ public class Game1 : Game
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
-        // _graphics.PreferredBackBufferWidth = 1920;
-        // _graphics.PreferredBackBufferHeight = 1080;
-        // _graphics.IsFullScreen = true;
-        // _graphics.ApplyChanges();
+        // _graphics.HardwareModeSwitch = false; 
+        // _graphics.PreferredBackBufferWidth = 1920;    
+        // _graphics.PreferredBackBufferHeight = 1080;    
+        // _graphics.IsFullScreen = false;
+        _graphics.ApplyChanges();
         Content.RootDirectory = "Content";
-        IsMouseVisible = true;
+        IsMouseVisible = false;
     }
 
     protected override void Initialize()

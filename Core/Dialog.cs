@@ -65,6 +65,8 @@ public class Dialog
 
         if (_inDialog)
         {
+            _player.DisableMovement();
+
             float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
             string text = _dialogPages[_currentPage];
             if (!_typingComplete)
@@ -92,6 +94,7 @@ public class Dialog
                     {
                         _inDialog = false;
                         _currentPage = 0;
+                        _player.EnableMovement();
                     }
                     else
                     {
@@ -101,6 +104,10 @@ public class Dialog
                     }
                 }
             }
+        }
+        else
+        {
+            _player.EnableMovement();
         }
     }
 
@@ -122,10 +129,10 @@ public class Dialog
     {
         if (_showingPrompt && _currentEntity != null)
         {
-            var pos = new Vector2((float)(_currentEntity.X + _currentEntity.Width / 2f), (float)(_currentEntity.Y - 40));
+            var pos = new Vector2((float)(_currentEntity.X + _currentEntity.Width / 2f) + 15, (float)(_currentEntity.Y - 20));
             string text = "(E) Talk";
             var size = GameState.Font.MeasureString(text) * 1.5f;
-            sb.DrawString(GameState.Font, text, pos - size * 0.5f, Color.White, 0f, Vector2.Zero, 2f, SpriteEffects.None, 0f);
+            sb.DrawString(GameState.Font, text, pos - size * 0.5f, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
         }
 
         if (_inDialog)
@@ -138,7 +145,7 @@ public class Dialog
 
             string display = _dialogPages[_currentPage].Substring(0, _visibleChars);
             Vector2 textPos = boxPos + new Vector2(30, 20);
-            sb.DrawString(GameState.Font, display, textPos, Color.White);
+            sb.DrawString(GameState.Font, display, textPos, Color.White, 0f, Vector2.Zero, 1.2f, SpriteEffects.None, 0f);
 
             if (_typingComplete)
             {
@@ -147,7 +154,7 @@ public class Dialog
                 {
                     string txt = "Press E";
                     var sz = GameState.Font.MeasureString(txt) * 1.2f;
-                    Vector2 enterPos = boxPos + new Vector2(boxWidth - sz.X - 30, boxHeight - 50);
+                    Vector2 enterPos = boxPos + new Vector2(boxWidth - sz.X - 30, boxHeight - 30);
                     sb.DrawString(GameState.Font, txt, enterPos, Color.White, 0f, Vector2.Zero, 1.2f, SpriteEffects.None, 0f);
                 }
             }

@@ -10,7 +10,9 @@ public class Player
     public Rectangle Bounds;
     private Texture2D texture;
     private float speed = 200f;
-
+    private bool _canMove = true;
+    public void DisableMovement() { _canMove = false; }
+    public void EnableMovement() { _canMove = true; }
     public Player(GraphicsDevice graphicsDevice, Vector2 startPosition)
     {
         Position = startPosition;
@@ -43,10 +45,12 @@ public class Player
     }
     public void Update(GameTime gameTime)
     {
+        
         float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
         Vector2 velocity = Vector2.Zero;
         var keyboard = Keyboard.GetState();
 
+        if (!_canMove) return;
         if (keyboard.IsKeyDown(Keys.A)) velocity.X -= 1;
         if (keyboard.IsKeyDown(Keys.D)) velocity.X += 1;
         if (keyboard.IsKeyDown(Keys.W)) velocity.Y -= 1;
