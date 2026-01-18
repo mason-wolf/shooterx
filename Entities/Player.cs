@@ -1,56 +1,52 @@
 using System.Linq;
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Content;
 using TiledSharp;
 
 public class Player
 {
     public Vector2 Position;
     public Rectangle Bounds;
-    private Texture2D texture;
-    private float speed = 200f;
+    private Texture2D _texture;
+    private readonly Rectangle[] _southFrames = new Rectangle[3];
+    private readonly Rectangle[] _eastFrames = new Rectangle[3];
+    private readonly Rectangle[] _westFrames = new Rectangle[3];
+    private int _currentFrame;
+    private float _frameTimer;
+    private const float FRAME_SPEED = 0.12f;
+    private string _currentDirection = "south"; 
+    private float speed = 50f;
     private bool _canMove = true;
-    public void DisableMovement() { _canMove = false; }
-    public void EnableMovement() { _canMove = true; }
-    public Player(GraphicsDevice graphicsDevice, Vector2 startPosition)
+
+    public Player(ContentManager content, Vector2 startPosition)
     {
         Position = startPosition;
-        Bounds = new Rectangle((int)Position.X, (int)Position.Y, 32, 32);
-        texture = new Texture2D(graphicsDevice, 1, 1);
-        texture.SetData(new[] { Color.White });
-    }
+        Bounds = new Rectangle((int)Position.X, (int)Position.Y, 16, 16);
 
-    private bool CheckTileCollision(TmxLayer collisionLayer, int tw, int th)
-    {
-        int left = (int)(Position.X / tw);
-        int right = (int)((Position.X + Bounds.Width) / tw);
-        int top = (int)(Position.Y / th);
-        int bottom = (int)((Position.Y + Bounds.Height) / th);
+        _texture = content.Load<Texture2D>("shooter");
 
-        for (int y = top; y <= bottom; y++)
+        for (int i = 0; i < 3; i++)
         {
-            for (int x = left; x <= right; x++)
-            {
-                if (x < 0 || y < 0 || x >= GameState.CurrentMap.Width || y >= GameState.CurrentMap.Height) continue;
-
-                var tile = collisionLayer.Tiles[y * GameState.CurrentMap.Width + x];
-                if (tile.Gid == 0) continue;
-
-                Rectangle tileRect = new Rectangle(x * tw, y * th, tw, th);
-                if (Bounds.Intersects(tileRect)) return true;
-            }
+            _southFrames[i] = new Rectangle(i * 16, 0, 16, 16);
+            _eastFrames[i]  = new Rectangle((i + 3) * 16, 0, 16, 16);
+            _westFrames[i]  = new Rectangle((i + 6) * 16, 0, 16, 16);
         }
-        return false;
     }
+
+    public void DisableMovement() { _canMove = false; }
+    public void EnableMovement() { _canMove = true; }
+
     public void Update(GameTime gameTime)
     {
-        
+        if (!_canMove) return;
+
         float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
         Vector2 velocity = Vector2.Zero;
         var keyboard = Keyboard.GetState();
 
-        if (!_canMove) return;
         if (keyboard.IsKeyDown(Keys.A)) velocity.X -= 1;
         if (keyboard.IsKeyDown(Keys.D)) velocity.X += 1;
         if (keyboard.IsKeyDown(Keys.W)) velocity.Y -= 1;
@@ -59,6 +55,25 @@ public class Player
         if (velocity.LengthSquared() > 0)
         {
             velocity.Normalize();
+
+            // Set direction priority: horizontal > vertical
+            if (velocity.X < 0) _currentDirection = "west";
+            else if (velocity.X > 0) _currentDirection = "east";
+            else if (velocity.Y < 0) _currentDirection = "east"; // north uses east
+            else if (velocity.Y > 0) _currentDirection = "south";
+
+            // Animate only when moving
+            _frameTimer += delta;
+            if (_frameTimer >= FRAME_SPEED)
+            {
+                _frameTimer -= FRAME_SPEED;
+                _currentFrame = (_currentFrame + 1) % 3;
+            }
+        }
+        else
+        {
+            _currentFrame = 0; // idle = first frame
+            _frameTimer = 0;
         }
 
         float moveX = velocity.X * speed * delta;
@@ -95,8 +110,39 @@ public class Player
             Bounds.Y = (int)Position.Y;
         }
     }
+
+    private bool CheckTileCollision(TmxLayer collisionLayer, int tw, int th)
+    {
+        int left   = (int)(Position.X / tw);
+        int right  = (int)((Position.X + Bounds.Width) / tw);
+        int top    = (int)(Position.Y / th);
+        int bottom = (int)((Position.Y + Bounds.Height) / th);
+
+        for (int y = top; y <= bottom; y++)
+        {
+            for (int x = left; x <= right; x++)
+            {
+                if (x < 0 || y < 0 || x >= GameState.CurrentMap.Width || y >= GameState.CurrentMap.Height) continue;
+
+                var tile = collisionLayer.Tiles[y * GameState.CurrentMap.Width + x];
+                if (tile.Gid == 0) continue;
+
+                Rectangle tileRect = new Rectangle(x * tw, y * th, tw, th);
+                if (Bounds.Intersects(tileRect)) return true;
+            }
+        }
+        return false;
+    }
+
     public void Draw(SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(texture, Bounds, Color.White);
+        Rectangle[] frames = _currentDirection switch
+        {
+            "west"  => _westFrames,
+            "east"  => _eastFrames, // also used for north
+            _       => _southFrames
+        };
+
+        spriteBatch.Draw(_texture, Bounds, frames[_currentFrame], Color.White);
     }
 }

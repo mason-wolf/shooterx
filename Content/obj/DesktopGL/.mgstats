@@ -1,3 +1,4 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"/home/mason/projects/shooterx/Content/Munro.spritefont","/home/mason/projects/shooterx/Content/bin/DesktopGL/Munro.xnb","FontDescriptionProcessor","SpriteFontContent",2012,21529,0.3845336
-"/home/mason/projects/shooterx/Content/tileset.png","/home/mason/projects/shooterx/Content/bin/DesktopGL/tileset.xnb","TextureProcessor","Texture2DContent",597,262229,0.1943611
+"/home/mason/projects/shooterx/Content/Munro.spritefont","/home/mason/projects/shooterx/Content/bin/DesktopGL/Munro.xnb","FontDescriptionProcessor","SpriteFontContent",2012,21529,0.3648121
+"/home/mason/projects/shooterx/Content/shooter.png","/home/mason/projects/shooterx/Content/bin/DesktopGL/shooter.xnb","TextureProcessor","Texture2DContent",498,9301,0.0236329
+"/home/mason/projects/shooterx/Content/tileset.png","/home/mason/projects/shooterx/Content/bin/DesktopGL/tileset.xnb","TextureProcessor","Texture2DContent",2561,262229,0.0415548

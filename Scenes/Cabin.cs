@@ -14,7 +14,7 @@ public class Cabin : Scene
 
     public override void LoadContent()
     {
-        _player = new Player(Game.GraphicsDevice, new Vector2(422, 600));
+        _player = new Player(Game.Content, new Vector2(422, 600));
         _map = new Map(Game);
         _map.LoadMap("Content/cabin.tmx", "tileset.png", _player);
     }

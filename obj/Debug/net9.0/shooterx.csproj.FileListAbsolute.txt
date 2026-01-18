@@ -39,3 +39,6 @@
 /home/mason/projects/shooterx/obj/Debug/net9.0/shooterx.genruntimeconfig.cache
 /home/mason/projects/shooterx/obj/Debug/net9.0/ref/shooterx.dll
 /home/mason/projects/shooterx/bin/Debug/net9.0/Content/tileset.tsx
+/home/mason/projects/shooterx/bin/Debug/net9.0/Content/shooter.xnb
+/home/mason/projects/shooterx/bin/Debug/net9.0/Content/shooter-export.png
+/home/mason/projects/shooterx/bin/Debug/net9.0/Content/shooter.png

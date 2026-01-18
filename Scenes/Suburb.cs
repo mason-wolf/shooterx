@@ -16,7 +16,7 @@ public class Suburb : Scene
 
     public override void LoadContent()
     {
-        _player = new Player(Game.GraphicsDevice, _startPosition);
+        _player = new Player(Game.Content, _startPosition);
         _map = new Map(Game);
         _map.LoadMap("Content/suburb.tmx", "tileset.png", _player);
         TransitionManager.Initialize(Game.GraphicsDevice);

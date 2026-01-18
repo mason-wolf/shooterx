@@ -6,7 +6,7 @@ public class Camera
 {
     public Vector2 Position;
     public Viewport viewport;
-    public float Zoom { get; set; } = 2f;
+    public float Zoom { get; set; } = 4f;
     private float lerpSpeed = 4f;
     private Vector2 target;
 
