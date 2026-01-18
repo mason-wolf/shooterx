@@ -14,7 +14,6 @@ public class Cabin : Scene
 
     public override void LoadContent()
     {
-        _player = new Player(Game.Content, new Vector2(422, 600));
         _map = new Map(Game);
         _map.LoadMap("Content/cabin.tmx", "tileset.png", _player);
     }
@@ -27,6 +26,8 @@ public class Cabin : Scene
         _camera.Update(gameTime);
 
 
+        Vector2 teleportPos = new Vector2(194, 112);
+        
         if (TransitionManager.IsActive)
         {
             TransitionManager.Update(gameTime);
@@ -38,10 +39,10 @@ public class Cabin : Scene
             .SetTeleporterName("suburb")
             .SetPlayer(_player)
             .SetCamera(_camera)
-            .SetStartingPosition(new Vector2(100, 100))
+            .SetStartingPosition(teleportPos)
             // Wouldn't normally provide another starting position here,
             // but since its the first scene loaded it needs it.
-            .SetScene(new Suburb(Game, new Vector2(100, 100)))
+            .SetScene(new Suburb(Game, teleportPos, _camera))
             .Execute();
     }
 

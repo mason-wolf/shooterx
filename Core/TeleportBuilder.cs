@@ -28,11 +28,12 @@ public class TeleportBuilder
                     Rectangle objRect = new Rectangle((int)obj.X, (int)obj.Y, (int)obj.Width, (int)obj.Height);
                     if (player.Bounds.Intersects(objRect) && !_teleported)
                     {
-
+                        
                         TransitionManager.Start(() =>
                         {
                             player.Position = startingPosition;
                             camera.Position = player.Position;
+                            camera.SetTarget(player.Position);
                             GameState.ChangeScene(scene);
                         });
                         _teleported = true;

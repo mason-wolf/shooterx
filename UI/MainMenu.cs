@@ -17,7 +17,8 @@ public class MenuScene : Scene
     {
         if (Keyboard.GetState().IsKeyDown(Keys.Enter))
         {
-            GameState.ChangeScene(new Suburb(Game, PLAYER_START_POSITION));
+            Camera camera = new Camera(Game.GraphicsDevice.Viewport);
+            GameState.ChangeScene(new Suburb(Game, PLAYER_START_POSITION, camera));
         }
     }
 

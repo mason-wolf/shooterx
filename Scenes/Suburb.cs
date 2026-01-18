@@ -9,19 +9,20 @@ public class Suburb : Scene
     private Camera _camera;
     private Vector2 _startPosition;
     private Dialog _dialog;
-    public Suburb(Game game, Vector2 startPosition) : base(game)
+    public Suburb(Game game, Vector2 startPosition, Camera camera) : base(game)
     {
         _startPosition = startPosition;
+        _camera = camera;
     }
 
     public override void LoadContent()
     {
+
         _player = new Player(Game.Content, _startPosition);
         _map = new Map(Game);
         _map.LoadMap("Content/suburb.tmx", "tileset.png", _player);
         TransitionManager.Initialize(Game.GraphicsDevice);
         //_map.SpawnEnemies(Game.GraphicsDevice);
-        _camera = new Camera(Game.GraphicsDevice.Viewport);
         _dialog = new Dialog(Game, _player);
     }
 
