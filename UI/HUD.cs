@@ -38,5 +38,13 @@ public void Draw(SpriteBatch spriteBatch, Player player)
     spriteBatch.DrawString(GameState.Font, player.Ammo.ToString(),
         new Vector2(260, 12),
         Color.White, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 0f);
+
+    spriteBatch.Draw(TextureManager.FirstAidKitTexture,
+        new Rectangle(ammoX + 80, ammoY, ammoIconSize, ammoIconSize),
+        Color.White);
+
+    spriteBatch.DrawString(GameState.Font, player.FirstAidKits.ToString(),
+        new Vector2(ammoX + 125, 12),
+        Color.White, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 0f);
 }
 }

@@ -47,3 +47,7 @@
 /home/mason/projects/shooterx/bin/Debug/net9.0/Content/bullet.png
 /home/mason/projects/shooterx/bin/Debug/net9.0/Content/ammo.xnb
 /home/mason/projects/shooterx/bin/Debug/net9.0/Content/ammo.png
+/home/mason/projects/shooterx/bin/Debug/net9.0/Content/health-pack.xnb
+/home/mason/projects/shooterx/bin/Debug/net9.0/Content/health-pack.png
+/home/mason/projects/shooterx/bin/Debug/net9.0/Content/note.xnb
+/home/mason/projects/shooterx/bin/Debug/net9.0/Content/note.png

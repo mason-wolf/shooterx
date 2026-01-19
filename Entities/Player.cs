@@ -31,7 +31,9 @@ public class Player : Entity
         Bounds = new Rectangle((int)Position.X, (int)Position.Y, 16, 16);
 
         Texture2D ammoIcon = game.Content.Load<Texture2D>("ammo");
+        Texture2D firstKitIcon = game.Content.Load<Texture2D>("health-pack");
         TextureManager.AmmoTexture = ammoIcon;
+        TextureManager.FirstAidKitTexture = firstKitIcon;
         _texture = game.Content.Load<Texture2D>("shooter");
         for (int i = 0; i < 3; i++)
         {

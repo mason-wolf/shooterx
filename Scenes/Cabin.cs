@@ -7,10 +7,14 @@ public class Cabin : Scene
     Map _map;
     Camera _camera;
     Dialog _cabinComputerDialog;
+    Dialog _firstAidKitNoteDialog;
+    HUD _hud;
+    Game _game;
     public Cabin(Game game, Player player, Camera camera) : base(game)
     {
         _player = player;
         _camera = camera;
+        _game = game;
     }
 
     public override void LoadContent()
@@ -23,6 +27,11 @@ public class Cabin : Scene
         _cabinComputerDialog.AddText("'It's not real. None of it is.'");
         _cabinComputerDialog.AddText("--Check out ChartUpCorp's new Human-Charged Battery Cells!--");
         _cabinComputerDialog.AddText("The rest of the email is unreadable because of so many ads.");
+
+        _firstAidKitNoteDialog = new Dialog(Game, _player, "note");
+        _firstAidKitNoteDialog.SetInteractionText("(E) Read Note");
+        _firstAidKitNoteDialog.AddText("Press (H) to use First Aid Kit.");
+        _hud = new HUD(_game.GraphicsDevice);
     }
 
     public override void Update(GameTime gameTime)
@@ -60,7 +69,9 @@ public class Cabin : Scene
             .SetStartingPosition(new Vector2(190, 192))
             .SetScene(new CabinBasement(Game, _player, _camera))
             .Execute();
+
         _cabinComputerDialog.Update(gameTime);
+        _firstAidKitNoteDialog.Update(gameTime);
     }
 
     public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
@@ -69,7 +80,14 @@ public class Cabin : Scene
         _map.Draw(spriteBatch, gameTime);
         _player.Draw(spriteBatch);
         TransitionManager.Draw(spriteBatch, new Rectangle(0, 0, 1920, 1080));
+
         _cabinComputerDialog.Draw(spriteBatch, gameTime);
+        _firstAidKitNoteDialog.Draw(spriteBatch, gameTime);
+
+        spriteBatch.End();
+
+        spriteBatch.Begin(transformMatrix: Matrix.Identity);
+        _hud.Draw(spriteBatch, _player);
         spriteBatch.End();
     }
 }

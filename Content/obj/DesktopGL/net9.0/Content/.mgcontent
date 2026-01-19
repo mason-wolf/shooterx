@@ -6,11 +6,15 @@
   <SourceFiles>
     <File>/home/mason/projects/shooterx/Content/ammo.png</File>
     <File>/home/mason/projects/shooterx/Content/bullet.png</File>
+    <File>/home/mason/projects/shooterx/Content/health-pack.png</File>
     <File>/home/mason/projects/shooterx/Content/Munro.spritefont</File>
+    <File>/home/mason/projects/shooterx/Content/note.png</File>
     <File>/home/mason/projects/shooterx/Content/shooter.png</File>
     <File>/home/mason/projects/shooterx/Content/tileset.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
