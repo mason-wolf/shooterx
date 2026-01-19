@@ -34,7 +34,8 @@ public class Map : Scene
         foreach (var obj in objectLayer.Objects)
         {
             Vector2 pos = new Vector2((float)obj.X + (float)obj.Width / 2, (float)obj.Y + (float)obj.Height / 2);
-            Enemies.Add(new Enemy(game, pos, _map));
+            var enemyType = obj.Properties.FirstOrDefault(p => p.Key == "type");
+            Enemies.Add(new Enemy(game, pos, _map, enemyType.Value));
         }
 
         GameState.Enemies = Enemies;

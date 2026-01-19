@@ -9,7 +9,8 @@ public class Enemy : Entity
 {
     public Vector2 Position;
     public Rectangle Bounds;
-    private Texture2D texture;
+    private string _type;
+    private Texture2D _texture;
     private float speed = 30f;
     private List<Vector2> path = new List<Vector2>();
     private int pathIndex = 0;
@@ -18,71 +19,131 @@ public class Enemy : Entity
     public TmxMap Map;
     private List<Projectile> projectiles = new List<Projectile>();
     private float shootTimer = 0f;
-    private float shootCooldown = 2f;
+    private float shootCooldown = 3f;
     Game _game;
-    public Enemy(Game game, Vector2 startPosition, TmxMap map)
+    private readonly Rectangle[] _southFrames = new Rectangle[3];
+    private readonly Rectangle[] _eastFrames = new Rectangle[3];
+    private readonly Rectangle[] _westFrames = new Rectangle[3];
+    private string _currentDirection = "south";
+    private int _currentFrame;
+    private float _frameTimer;
+    private const float FRAME_SPEED = 0.12f;
+    public Enemy(Game game, Vector2 startPosition, TmxMap map, string type)
     {
         _game = game;
         Position = startPosition;
         Bounds = new Rectangle((int)Position.X, (int)Position.Y, 16, 16);
-        texture = new Texture2D(game.GraphicsDevice, 1, 1);
-        texture.SetData(new[] { Color.Red });
+        _texture = game.Content.Load<Texture2D>("thug-1");
+        for (int i = 0; i < 3; i++)
+        {
+            _southFrames[i] = new Rectangle(i * 16, 0, 16, 16);
+            _eastFrames[i] = new Rectangle((i + 3) * 16, 0, 16, 16);
+            _westFrames[i] = new Rectangle((i + 6) * 16, 0, 16, 16);
+        }
         Map = map;
+        _type = type;
     }
-    public void Update(GameTime gameTime, Player player)
+public void Update(GameTime gameTime, Player player)
+{
+    float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
+    updateTimer += delta;
+
+    Vector2 previousPosition = Position;
+
+    if (updateTimer >= PATH_UPDATE_INTERVAL || pathIndex >= path.Count)
     {
-        float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
-        updateTimer += delta;
+        path = AStar(player.Position);
+        pathIndex = 0;
+        updateTimer = 0f;
+    }
 
-        if (updateTimer >= PATH_UPDATE_INTERVAL || pathIndex >= path.Count)
+    if (pathIndex < path.Count)
+    {
+        Vector2 target = path[pathIndex];
+        Vector2 dir = Vector2.Normalize(target - Position);
+        Position += dir * speed * delta;
+        Bounds.X = (int)Position.X;
+        Bounds.Y = (int)Position.Y;
+
+        if (Vector2.Distance(Position, target) < 8f)
+            pathIndex++;
+    }
+
+    // Separation to prevent stacking
+    Vector2 separation = Vector2.Zero;
+    int count = 0;
+
+    foreach (var other in GameState.Enemies)
+    {
+        if (other != this && Vector2.Distance(Position, other.Position) < 40f)
         {
-            path = AStar(player.Position);
-            pathIndex = 0;
-            updateTimer = 0f;
-        }
-
-        if (pathIndex < path.Count)
-        {
-            Vector2 target = path[pathIndex];
-            Vector2 dir = Vector2.Normalize(target - Position);
-
-            Position += dir * speed * delta;
-            Bounds.X = (int)Position.X;
-            Bounds.Y = (int)Position.Y;
-
-            if (Vector2.Distance(Position, target) < 8f)
-                pathIndex++;
-        }
-
-        shootTimer -= delta;
-
-        if (shootTimer <= 0 && Health > 0)
-        {
-            Vector2 dir = Vector2.Normalize(player.Position - Position);
-            projectiles.Add(new Projectile(_game, Position + new Vector2(8, 8), dir));
-            shootTimer = shootCooldown;
-        }
-
-        for (int i = projectiles.Count - 1; i >= 0; i--)
-        {
-            projectiles[i].Update(gameTime);
-
-            Rectangle projBounds = new Rectangle(
-                (int)projectiles[i].Position.X - 4,
-                (int)projectiles[i].Position.Y - 4,
-                16, 16);
-
-            if (projBounds.Intersects(player.Bounds))
-            {
-                player.Health -= 10;
-                projectiles.RemoveAt(i);
-            }
-            else if (!projectiles[i].Active)
-            {
-                projectiles.RemoveAt(i);
-            }
+            Vector2 diff = Position - other.Position;
+            separation += diff != Vector2.Zero ? Vector2.Normalize(diff) / diff.Length() : Vector2.Zero;
+            count++;
         }
     }
+
+    if (count > 0)
+    {
+        separation /= count;
+        separation.Normalize();
+        Position += separation * speed * delta * 0.5f;
+        Bounds.X = (int)Position.X;
+        Bounds.Y = (int)Position.Y;
+    }
+
+    // Direction & animation
+    Vector2 moveDir = Position - previousPosition;
+    if (moveDir.LengthSquared() > 0.01f)
+    {
+        moveDir.Normalize();
+        if (Math.Abs(moveDir.Y) > Math.Abs(moveDir.X))
+            _currentDirection = moveDir.Y < 0 ? "north" : "south";
+        else
+            _currentDirection = moveDir.X < 0 ? "west" : "east";
+
+        _frameTimer += delta;
+        if (_frameTimer >= FRAME_SPEED)
+        {
+            _frameTimer -= FRAME_SPEED;
+            _currentFrame = (_currentFrame + 1) % 3;
+        }
+    }
+    else
+    {
+        _currentFrame = 0;
+        _frameTimer = 0;
+    }
+
+    shootTimer -= delta;
+
+    if (shootTimer <= 0 && Health > 0)
+    {
+        Vector2 dir = Vector2.Normalize(player.Position - Position);
+        projectiles.Add(new Projectile(_game, Position + new Vector2(8, 8), dir));
+        shootTimer = shootCooldown;
+    }
+
+    for (int i = projectiles.Count - 1; i >= 0; i--)
+    {
+        projectiles[i].Update(gameTime);
+
+        Rectangle projBounds = new Rectangle(
+            (int)projectiles[i].Position.X - 4,
+            (int)projectiles[i].Position.Y - 4,
+            8, 8);
+
+        if (projBounds.Intersects(player.Bounds))
+        {
+            player.Health -= 5;
+            projectiles.RemoveAt(i);
+        }
+        else if (!projectiles[i].Active)
+        {
+            projectiles.RemoveAt(i);
+        }
+    }
+}
     private List<Vector2> AStar(Vector2 goal)
     {
         var openSet = new List<(Vector2 pos, float g, float h)>();
@@ -143,7 +204,14 @@ public class Enemy : Entity
     }
     public void Draw(SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(texture, Bounds, Color.White);
+        Rectangle[] frames = _currentDirection switch
+        {
+            "west" => _westFrames,
+            "east" => _eastFrames,
+            _ => _southFrames
+        };
+
+        spriteBatch.Draw(_texture, Bounds, frames[_currentFrame], Color.White);
         foreach (var p in projectiles) p.Draw(spriteBatch);
     }
 }

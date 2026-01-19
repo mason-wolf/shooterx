@@ -34,7 +34,9 @@ public class Player : Entity
         Texture2D firstKitIcon = game.Content.Load<Texture2D>("health-pack");
         TextureManager.AmmoTexture = ammoIcon;
         TextureManager.FirstAidKitTexture = firstKitIcon;
+        
         _texture = game.Content.Load<Texture2D>("shooter");
+
         for (int i = 0; i < 3; i++)
         {
             _southFrames[i] = new Rectangle(i * 16, 0, 16, 16);
@@ -102,6 +104,7 @@ public class Player : Entity
         float moveY = velocity.Y * speed * delta;
 
         var collisionLayer = GameState.CurrentMap.Layers.FirstOrDefault(l => l.Name == "collision");
+
         if (collisionLayer == null)
         {
             Position.X += moveX;
@@ -141,6 +144,7 @@ public class Player : Entity
         }
     }
 
+    
     public void HandleShooting(GameTime gameTime, Game game)
     {
         shootTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -179,14 +183,14 @@ public class Player : Entity
             Rectangle projBounds = new Rectangle(
                 (int)projectiles[i].Position.X - 4,
                 (int)projectiles[i].Position.Y - 4,
-                16, 16);
+                8, 8);
 
             List<Enemy> enemies = GameState.Enemies;
             foreach (Enemy enemy in enemies)
             {
                 if (projBounds.Intersects(enemy.Bounds))
                 {
-                    enemy.Health -= 25;
+                    enemy.Health -= 50;
                     projectiles.RemoveAt(i);
                     break;
                 }

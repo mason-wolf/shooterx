@@ -92,6 +92,18 @@
 /processorParam:TextureFormat=Color
 /build:shooter.png
 
+#begin thug-1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:thug-1.png
+
 #begin tileset.png
 /importer:TextureImporter
 /processor:TextureProcessor

@@ -6,6 +6,7 @@ public class CabinBasement: Scene
     Player _player;
     Map _map;
     Camera _camera;
+    HUD _hud;
 
     public CabinBasement(Game game, Player player, Camera camera) : base(game)
     {
@@ -18,6 +19,7 @@ public class CabinBasement: Scene
         _map = new Map(Game);
         _map.LoadMap("Content/cabin_basement.tmx", "tileset.png", _player);
         _map.SpawnEnemies(Game);
+        _hud = new HUD(Game.GraphicsDevice);
     }
 
     public override void Update(GameTime gameTime)
@@ -52,6 +54,11 @@ public class CabinBasement: Scene
         _player.Draw(spriteBatch);
         DebugOverlay.Draw(spriteBatch, _player.Position);
         TransitionManager.Draw(spriteBatch, new Rectangle(0, 0, 1920, 1080));
+        spriteBatch.End();
+
+
+        spriteBatch.Begin(transformMatrix: Matrix.Identity);
+        _hud.Draw(spriteBatch, _player);
         spriteBatch.End();
     }
 }

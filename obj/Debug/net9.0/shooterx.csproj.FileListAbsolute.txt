@@ -4,7 +4,6 @@
 /home/mason/projects/shooterx/bin/Debug/net9.0/Content/tileset.xnb
 /home/mason/projects/shooterx/bin/Debug/net9.0/Content/cabin.tmx
 /home/mason/projects/shooterx/bin/Debug/net9.0/Content/suburb.tmx
-/home/mason/projects/shooterx/bin/Debug/net9.0/Content/shooter-export.png
 /home/mason/projects/shooterx/bin/Debug/net9.0/Content/shooter.png
 /home/mason/projects/shooterx/bin/Debug/net9.0/Content/tileset.png
 /home/mason/projects/shooterx/bin/Debug/net9.0/shooterx
@@ -53,3 +52,5 @@
 /home/mason/projects/shooterx/bin/Debug/net9.0/Content/note.png
 /home/mason/projects/shooterx/bin/Debug/net9.0/Content/money.xnb
 /home/mason/projects/shooterx/bin/Debug/net9.0/Content/money.png
+/home/mason/projects/shooterx/bin/Debug/net9.0/Content/thug-1.xnb
+/home/mason/projects/shooterx/bin/Debug/net9.0/Content/thug-1.png
