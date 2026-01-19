@@ -17,7 +17,6 @@ public class Cabin : Scene
     {
         _map = new Map(Game);
         _map.LoadMap("Content/cabin.tmx", "tileset.png", _player);
-        _map.SpawnEnemies(Game.GraphicsDevice);
         _cabinComputerDialog = new Dialog(Game, _player, "cabin_computer");
         _cabinComputerDialog.SetInteractionText("(E) Access Computer");
         _cabinComputerDialog.AddText("You have an email from an unknown sender.");

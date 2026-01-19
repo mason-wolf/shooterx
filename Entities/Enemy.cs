@@ -16,12 +16,16 @@ public class Enemy
     private float updateTimer = 0f;
     private const float PATH_UPDATE_INTERVAL = 2f;
     public TmxMap Map;
-
-public Enemy(GraphicsDevice graphicsDevice, Vector2 startPosition, TmxMap map)
+    private List<Projectile> projectiles = new List<Projectile>();
+    private float shootTimer = 0f;
+    private float shootCooldown = 2f;
+    Game _game;
+    public Enemy(Game game, Vector2 startPosition, TmxMap map)
     {
+        _game = game;
         Position = startPosition;
         Bounds = new Rectangle((int)Position.X, (int)Position.Y, 16, 16);
-        texture = new Texture2D(graphicsDevice, 1, 1);
+        texture = new Texture2D(game.GraphicsDevice, 1, 1);
         texture.SetData(new[] { Color.Red });
         Map = map;
     }
@@ -48,6 +52,20 @@ public Enemy(GraphicsDevice graphicsDevice, Vector2 startPosition, TmxMap map)
 
             if (Vector2.Distance(Position, target) < 8f)
                 pathIndex++;
+        }
+
+        shootTimer -= delta;
+        if (shootTimer <= 0)
+        {
+            Vector2 dir = Vector2.Normalize(playerPos - Position);
+            projectiles.Add(new Projectile(_game, Position + new Vector2(8, 8), dir));
+            shootTimer = shootCooldown;
+        }
+
+        for (int i = projectiles.Count - 1; i >= 0; i--)
+        {
+            projectiles[i].Update(gameTime);
+            if (!projectiles[i].Active) projectiles.RemoveAt(i);
         }
     }
     private List<Vector2> AStar(Vector2 goal)
@@ -111,5 +129,6 @@ public Enemy(GraphicsDevice graphicsDevice, Vector2 startPosition, TmxMap map)
     public void Draw(SpriteBatch spriteBatch)
     {
         spriteBatch.Draw(texture, Bounds, Color.White);
+        foreach (var p in projectiles) p.Draw(spriteBatch);
     }
 }

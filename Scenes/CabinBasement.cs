@@ -17,7 +17,7 @@ public class CabinBasement: Scene
     {
         _map = new Map(Game);
         _map.LoadMap("Content/cabin_basement.tmx", "tileset.png", _player);
-        _map.SpawnEnemies(Game.GraphicsDevice);
+        _map.SpawnEnemies(Game);
     }
 
     public override void Update(GameTime gameTime)
@@ -32,6 +32,16 @@ public class CabinBasement: Scene
             TransitionManager.Update(gameTime);
             return;
         }
+
+        
+        new TeleportBuilder()
+            .SetGameTime(gameTime)
+            .SetTeleporterName("cabin")
+            .SetPlayer(_player)
+            .SetCamera(_camera)
+            .SetStartingPosition(new Vector2(350, 570))
+            .SetScene(new Cabin(Game, _player, _camera))
+            .Execute();
 
     }
 

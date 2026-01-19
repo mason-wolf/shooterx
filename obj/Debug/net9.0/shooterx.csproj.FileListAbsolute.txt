@@ -43,3 +43,5 @@
 /home/mason/projects/shooterx/obj/Debug/net9.0/shooterx.genruntimeconfig.cache
 /home/mason/projects/shooterx/obj/Debug/net9.0/ref/shooterx.dll
 /home/mason/projects/shooterx/bin/Debug/net9.0/Content/cabin_basement.tmx
+/home/mason/projects/shooterx/bin/Debug/net9.0/Content/bullet.xnb
+/home/mason/projects/shooterx/bin/Debug/net9.0/Content/bullet.png

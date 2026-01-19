@@ -17,7 +17,7 @@ public class Template: Scene
     {
         _map = new Map(Game);
         _map.LoadMap("Content/<map_name>.tmx", "tileset.png", _player);
-        _map.SpawnEnemies(Game.GraphicsDevice);
+        _map.SpawnEnemies(Game);
     }
 
     public override void Update(GameTime gameTime)

@@ -22,7 +22,26 @@ public class Map : Scene
         _player = player;
     }
 
-public void SpawnEnemies(GraphicsDevice graphicsDevice)
+public Vector2 GetSpawnPoint(string spawnPointName)
+    {
+        Vector2 spawnPoint = Vector2.Zero;
+
+        var objectLayer = _map.ObjectGroups.FirstOrDefault(l => l.Name == "spawn");
+
+        if (objectLayer == null) return spawnPoint;
+
+        foreach(var obj in objectLayer.Objects)
+        {
+            if (obj.Name == spawnPointName)
+            {
+                spawnPoint = new Vector2((float)obj.X + (float)obj.Width / 2, (float)obj.Y + (float)obj.Height / 2);
+                break;
+            }
+        }
+        return spawnPoint;
+    }
+    
+public void SpawnEnemies(Game game)
 {
     Enemies.Clear();
 
@@ -33,7 +52,7 @@ public void SpawnEnemies(GraphicsDevice graphicsDevice)
     foreach (var obj in objectLayer.Objects)
     {
         Vector2 pos = new Vector2((float)obj.X + (float)obj.Width / 2, (float)obj.Y + (float)obj.Height / 2);
-        Enemies.Add(new Enemy(graphicsDevice, pos, _map));
+        Enemies.Add(new Enemy(game, pos, _map));
     }
 }
 
