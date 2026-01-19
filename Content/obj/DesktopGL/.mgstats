@@ -1,4 +1,5 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"/home/mason/projects/shooterx/Content/ammo.png","/home/mason/projects/shooterx/Content/bin/DesktopGL/ammo.xnb","TextureProcessor","Texture2DContent",221,1109,0.135108
 "/home/mason/projects/shooterx/Content/bullet.png","/home/mason/projects/shooterx/Content/bin/DesktopGL/bullet.xnb","TextureProcessor","Texture2DContent",102,1109,0.2160977
 "/home/mason/projects/shooterx/Content/Munro.spritefont","/home/mason/projects/shooterx/Content/bin/DesktopGL/Munro.xnb","FontDescriptionProcessor","SpriteFontContent",2012,21529,0.1514708
 "/home/mason/projects/shooterx/Content/shooter.png","/home/mason/projects/shooterx/Content/bin/DesktopGL/shooter.xnb","TextureProcessor","Texture2DContent",498,9301,0.005058

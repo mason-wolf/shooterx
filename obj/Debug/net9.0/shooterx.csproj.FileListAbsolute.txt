@@ -45,3 +45,5 @@
 /home/mason/projects/shooterx/bin/Debug/net9.0/Content/cabin_basement.tmx
 /home/mason/projects/shooterx/bin/Debug/net9.0/Content/bullet.xnb
 /home/mason/projects/shooterx/bin/Debug/net9.0/Content/bullet.png
+/home/mason/projects/shooterx/bin/Debug/net9.0/Content/ammo.xnb
+/home/mason/projects/shooterx/bin/Debug/net9.0/Content/ammo.png

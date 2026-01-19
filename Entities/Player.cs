@@ -30,6 +30,8 @@ public class Player : Entity
         Position = startPosition;
         Bounds = new Rectangle((int)Position.X, (int)Position.Y, 16, 16);
 
+        Texture2D ammoIcon = game.Content.Load<Texture2D>("ammo");
+        TextureManager.AmmoTexture = ammoIcon;
         _texture = game.Content.Load<Texture2D>("shooter");
         for (int i = 0; i < 3; i++)
         {
@@ -144,10 +146,11 @@ public class Player : Entity
         }
 
         var mouse = Mouse.GetState();
-        if (mouse.LeftButton == ButtonState.Pressed && shootTimer <= 0)
+        if (mouse.LeftButton == ButtonState.Pressed && shootTimer <= 0 && Ammo > 0)
         {
             dir.Normalize();
             projectiles.Add(new Projectile(game, Position + new Vector2(8, 8), dir));
+            Ammo--;
             shootTimer = shootCooldown;
         }
         for (int i = projectiles.Count - 1; i >= 0; i--)
