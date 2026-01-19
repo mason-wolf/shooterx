@@ -53,6 +53,14 @@ public class Cabin : Scene
             .SetScene(new Suburb(Game, teleportPos, _camera))
             .Execute();
         
+        new TeleportBuilder()
+            .SetGameTime(gameTime)
+            .SetTeleporterName("basement")
+            .SetPlayer(_player)
+            .SetCamera(_camera)
+            .SetStartingPosition(new Vector2(190, 192))
+            .SetScene(new CabinBasement(Game, _player, _camera))
+            .Execute();
         _cabinComputerDialog.Update(gameTime);
     }
 
