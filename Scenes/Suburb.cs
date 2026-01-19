@@ -69,7 +69,7 @@ public class Suburb : Scene
         spriteBatch.End();
 
         spriteBatch.Begin(transformMatrix: Matrix.Identity);
-        _hud.Draw(spriteBatch);
+        _hud.Draw(spriteBatch, _player);
         spriteBatch.End();
     }
 }

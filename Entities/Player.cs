@@ -1,13 +1,11 @@
 using System.Linq;
-using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Content;
 using TiledSharp;
 using System.Collections.Generic;
 
-public class Player
+public class Player : Entity
 {
     public Vector2 Position;
     public Rectangle Bounds;
@@ -115,6 +113,11 @@ public class Player
         }
 
         HandleShooting(gameTime, _game);
+
+        if (Health <= 0)
+        {
+            GameState.ChangeScene(new GameOver(_game));
+        }
     }
 
     public void HandleShooting(GameTime gameTime, Game game)
@@ -147,11 +150,25 @@ public class Player
             projectiles.Add(new Projectile(game, Position + new Vector2(8, 8), dir));
             shootTimer = shootCooldown;
         }
-
         for (int i = projectiles.Count - 1; i >= 0; i--)
         {
             projectiles[i].Update(gameTime);
-            if (!projectiles[i].Active) projectiles.RemoveAt(i);
+
+            Rectangle projBounds = new Rectangle(
+                (int)projectiles[i].Position.X - 4,
+                (int)projectiles[i].Position.Y - 4,
+                16, 16);
+
+            List<Enemy> enemies = GameState.Enemies;
+            foreach (Enemy enemy in enemies)
+            {
+                if (projBounds.Intersects(enemy.Bounds))
+                {
+                    enemy.Health -= 25;
+                    projectiles.RemoveAt(i);
+                    break;
+                }
+            }
         }
     }
     private bool CheckTileCollision(TmxLayer collisionLayer, int tw, int th)

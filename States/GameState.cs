@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 using TiledSharp;
 
@@ -19,6 +20,10 @@ public static class GameState
     /// Transition flag to indicate if a scene transition is in progress.
     /// </summary>
     public static bool Transitioning { get; set; } = false;
+    /// <summary>
+    /// List of all enemies in the current game state.
+    /// </summary>
+    public static List<Enemy> Enemies = new List<Enemy>();
     public static void ChangeScene(Scene newScene)
     {
         CurrentScene?.UnloadContent();

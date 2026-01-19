@@ -23,7 +23,7 @@ public class Game1 : Game
     protected override void Initialize()
     {
         base.Initialize();
-        GameState.ChangeScene(new MenuScene(this));
+        GameState.ChangeScene(new MainMenu(this));
     }
 
     protected override void LoadContent()

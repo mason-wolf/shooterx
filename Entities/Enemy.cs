@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using TiledSharp;
 
-public class Enemy
+public class Enemy : Entity
 {
     public Vector2 Position;
     public Rectangle Bounds;
@@ -29,14 +29,14 @@ public class Enemy
         texture.SetData(new[] { Color.Red });
         Map = map;
     }
-    public void Update(GameTime gameTime, Vector2 playerPos)
+    public void Update(GameTime gameTime, Player player)
     {
         float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
         updateTimer += delta;
 
         if (updateTimer >= PATH_UPDATE_INTERVAL || pathIndex >= path.Count)
         {
-            path = AStar(playerPos);
+            path = AStar(player.Position);
             pathIndex = 0;
             updateTimer = 0f;
         }
@@ -55,9 +55,10 @@ public class Enemy
         }
 
         shootTimer -= delta;
-        if (shootTimer <= 0)
+
+        if (shootTimer <= 0 && Health > 0)
         {
-            Vector2 dir = Vector2.Normalize(playerPos - Position);
+            Vector2 dir = Vector2.Normalize(player.Position - Position);
             projectiles.Add(new Projectile(_game, Position + new Vector2(8, 8), dir));
             shootTimer = shootCooldown;
         }
@@ -65,7 +66,21 @@ public class Enemy
         for (int i = projectiles.Count - 1; i >= 0; i--)
         {
             projectiles[i].Update(gameTime);
-            if (!projectiles[i].Active) projectiles.RemoveAt(i);
+
+            Rectangle projBounds = new Rectangle(
+                (int)projectiles[i].Position.X - 4,
+                (int)projectiles[i].Position.Y - 4,
+                16, 16);
+
+            if (projBounds.Intersects(player.Bounds))
+            {
+                player.Health -= 10;
+                projectiles.RemoveAt(i);
+            }
+            else if (!projectiles[i].Active)
+            {
+                projectiles.RemoveAt(i);
+            }
         }
     }
     private List<Vector2> AStar(Vector2 goal)

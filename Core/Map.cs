@@ -44,7 +44,7 @@ public Vector2 GetSpawnPoint(string spawnPointName)
 public void SpawnEnemies(Game game)
 {
     Enemies.Clear();
-
+    GameState.Enemies.Clear();
     var objectLayer = _map.ObjectGroups.FirstOrDefault(l => l.Name == "enemy");
 
     if (objectLayer == null) return;
@@ -54,12 +54,14 @@ public void SpawnEnemies(Game game)
         Vector2 pos = new Vector2((float)obj.X + (float)obj.Width / 2, (float)obj.Y + (float)obj.Height / 2);
         Enemies.Add(new Enemy(game, pos, _map));
     }
+
+    GameState.Enemies = Enemies;
 }
 
     public override void Update(GameTime gameTime)
     {
         foreach (var enemy in Enemies)
-            enemy.Update(gameTime, _player.Position);
+            enemy.Update(gameTime, _player);
 
     }
 
@@ -87,6 +89,9 @@ public void SpawnEnemies(Game game)
         }
 
         foreach (var enemy in Enemies)
-            enemy.Draw(spriteBatch);
+        if (enemy.Health > 0)
+            {
+                enemy.Draw(spriteBatch);   
+            }
     }
 }

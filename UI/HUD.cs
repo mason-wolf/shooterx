@@ -11,12 +11,19 @@ public class HUD
     }
 
 
-public void Draw(SpriteBatch spriteBatch)
+public void Draw(SpriteBatch spriteBatch, Player player)
 {
     const int width = 200;
     const int height = 25;
     const int margin = 10;
+
+    float healthRatio = player.Health / 100f;
+    int fillWidth = (int)(width * healthRatio);
+
+    spriteBatch.Draw(pixel, new Rectangle(margin, margin, width, height), new Color(50, 50, 50));
+
     spriteBatch.Draw(pixel, 
-    new Rectangle(margin, margin, width, height), new Color(180, 30, 30));
+        new Rectangle(margin, margin, fillWidth, height), 
+        new Color(200 - (int)(170 * healthRatio), 30 + (int)(170 * healthRatio), 30));
 }
 }

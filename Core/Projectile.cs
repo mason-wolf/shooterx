@@ -7,7 +7,7 @@ public class Projectile
     public Vector2 Position;
     public Vector2 Velocity;
     public bool Active = true;
-    private Texture2D texture;
+    public Texture2D Texture;
     private static Texture2D bulletTexture;
 
     public Projectile(Game game, Vector2 start, Vector2 dir)
@@ -16,7 +16,7 @@ public class Projectile
         {
             bulletTexture = game.Content.Load<Texture2D>("bullet");
         }
-        texture = bulletTexture;
+        Texture = bulletTexture;
 
         Position = start;
         Velocity = Vector2.Normalize(dir) * 100f;
@@ -32,6 +32,6 @@ public class Projectile
     public void Draw(SpriteBatch sb)
     {
         if (!Active) return;
-        sb.Draw(texture, Position, null, Color.White, 0f, new Vector2(texture.Width / 2f, texture.Height / 2f), 1f, SpriteEffects.None, 0f);
+        sb.Draw(Texture, Position, null, Color.White, 0f, new Vector2(Texture.Width / 2f, Texture.Height / 2f), 1f, SpriteEffects.None, 0f);
     }
 }
