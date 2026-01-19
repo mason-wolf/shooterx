@@ -20,14 +20,12 @@ public class Player
     private string _currentDirection = "south"; 
     private float speed = 50f;
     private bool _canMove = true;
-
-    public Player(ContentManager content, Vector2 startPosition)
+    public Player(Game game, Vector2 startPosition)
     {
         Position = startPosition;
         Bounds = new Rectangle((int)Position.X, (int)Position.Y, 16, 16);
 
-        _texture = content.Load<Texture2D>("shooter");
-
+        _texture = game.Content.Load<Texture2D>("shooter");
         for (int i = 0; i < 3; i++)
         {
             _southFrames[i] = new Rectangle(i * 16, 0, 16, 16);
@@ -56,13 +54,12 @@ public class Player
         {
             velocity.Normalize();
 
-            // Set direction priority: horizontal > vertical
             if (velocity.X < 0) _currentDirection = "west";
             else if (velocity.X > 0) _currentDirection = "east";
-            else if (velocity.Y < 0) _currentDirection = "east"; // north uses east
+            else if (velocity.Y < 0) _currentDirection = "east"; 
             else if (velocity.Y > 0) _currentDirection = "south";
 
-            // Animate only when moving
+
             _frameTimer += delta;
             if (_frameTimer >= FRAME_SPEED)
             {
@@ -72,7 +69,7 @@ public class Player
         }
         else
         {
-            _currentFrame = 0; // idle = first frame
+            _currentFrame = 0; 
             _frameTimer = 0;
         }
 
@@ -139,7 +136,7 @@ public class Player
         Rectangle[] frames = _currentDirection switch
         {
             "west"  => _westFrames,
-            "east"  => _eastFrames, // also used for north
+            "east"  => _eastFrames,
             _       => _southFrames
         };
 
