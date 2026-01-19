@@ -51,3 +51,5 @@
 /home/mason/projects/shooterx/bin/Debug/net9.0/Content/health-pack.png
 /home/mason/projects/shooterx/bin/Debug/net9.0/Content/note.xnb
 /home/mason/projects/shooterx/bin/Debug/net9.0/Content/note.png
+/home/mason/projects/shooterx/bin/Debug/net9.0/Content/money.xnb
+/home/mason/projects/shooterx/bin/Debug/net9.0/Content/money.png

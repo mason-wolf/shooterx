@@ -22,8 +22,31 @@ public class ItemPickupManager : Scene
             if (obj.Name == "first_aid_kit")
             {
                 Item item = new Item();
+                item.Name = "first_aid_kit";
                 item.Position = new Vector2((float)obj.X, (float)obj.Y);
                 item.Texture = TextureManager.FirstAidKitTexture;
+                items.Add(item);
+            }
+
+            if (obj.Name == "money")
+            {
+                Item item = new Item();
+                item.Name = "money";
+                item.Position = new Vector2((float)obj.X, (float)obj.Y);
+                item.Texture = TextureManager.MoneyTexture;
+
+                var amountProp = obj.Properties.FirstOrDefault(p => p.Key == "amount");
+                item.Value = int.Parse(amountProp.Value);
+
+                items.Add(item);
+            }
+
+            if (obj.Name == "ammo")
+            {
+                Item item = new Item();
+                item.Name = "ammo";
+                item.Position = new Vector2((float)obj.X, (float)obj.Y);
+                item.Texture = TextureManager.AmmoTexture;
                 items.Add(item);
             }
         }
@@ -34,10 +57,22 @@ public class ItemPickupManager : Scene
     {
         foreach(Item item in items)
         {
-            if (_player.Bounds.Intersects(item.Bounds) && !item.PickedUp)
+            if (_player.Bounds.Intersects(item.Bounds) && !item.PickedUp && item.Name == "first_aid_kit")
             {
                 item.PickedUp = true;
                 _player.FirstAidKits++;
+            }
+
+            if (_player.Bounds.Intersects(item.Bounds) && !item.PickedUp && item.Name == "money")
+            {
+                item.PickedUp = true;
+                _player.Money += item.Value;
+            }
+
+            if (_player.Bounds.Intersects(item.Bounds) && !item.PickedUp && item.Name == "ammo")
+            {
+                item.PickedUp = true;
+                _player.Ammo += 3;
             }
         }
     }

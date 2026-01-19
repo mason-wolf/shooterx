@@ -13,6 +13,9 @@ public class WorldObjects : Scene
     {
         Texture2D note = _game.Content.Load<Texture2D>("note");
         TextureManager.NoteTexture = note;
+
+        Texture2D money = _game.Content.Load<Texture2D>("money");
+        TextureManager.MoneyTexture = money;
         base.LoadContent();
     }
 }

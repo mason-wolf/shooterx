@@ -13,4 +13,5 @@ public class Item
     16);
     public bool CanPickUp { get; set; } = false;
     public bool PickedUp { get; set; } = false;
+    public int Value { get; set; } = 0;
 }

@@ -30,6 +30,7 @@ public void Draw(SpriteBatch spriteBatch, Player player)
     int ammoX = margin + width + ammoGap;
     int ammoY = margin + (height - ammoIconSize) / 2;
 
+    // Ammo
     spriteBatch.Draw(TextureManager.AmmoTexture, 
         new Rectangle(ammoX, ammoY, ammoIconSize, ammoIconSize), 
         Color.White);
@@ -39,6 +40,7 @@ public void Draw(SpriteBatch spriteBatch, Player player)
         new Vector2(260, 12),
         Color.White, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 0f);
 
+    // First Aid Kit
     spriteBatch.Draw(TextureManager.FirstAidKitTexture,
         new Rectangle(ammoX + 80, ammoY, ammoIconSize, ammoIconSize),
         Color.White);
@@ -46,5 +48,15 @@ public void Draw(SpriteBatch spriteBatch, Player player)
     spriteBatch.DrawString(GameState.Font, player.FirstAidKits.ToString(),
         new Vector2(ammoX + 125, 12),
         Color.White, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 0f);
+
+    // Money
+    spriteBatch.Draw(TextureManager.MoneyTexture,
+        new Rectangle(ammoX + 150, 10, ammoIconSize, ammoIconSize),
+        Color.White);
+
+    spriteBatch.DrawString(GameState.Font, "$ " + player.Money.ToString(),
+        new Vector2(ammoX + 195, 12),
+        Color.White, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 0f);
+
 }
 }

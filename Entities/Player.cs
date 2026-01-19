@@ -46,6 +46,21 @@ public class Player : Entity
     public void DisableMovement() { _canMove = false; }
     public void EnableMovement() { _canMove = true; }
 
+    private KeyboardState _prevKeyboard;
+
+    private void HandleFirstAidKitUse(KeyboardState keyboard)
+    {
+        if (keyboard.IsKeyDown(Keys.H) && !_prevKeyboard.IsKeyDown(Keys.H))
+        {
+            if (FirstAidKits > 0)
+            {
+                Health = 100;
+                FirstAidKits--;
+            }
+        }
+        _prevKeyboard = keyboard;
+    }
+
     public void Update(GameTime gameTime)
     {
         if (!_canMove) return;
@@ -53,6 +68,8 @@ public class Player : Entity
         float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
         Vector2 velocity = Vector2.Zero;
         var keyboard = Keyboard.GetState();
+
+        HandleFirstAidKitUse(keyboard);
 
         if (keyboard.IsKeyDown(Keys.A)) velocity.X -= 1;
         if (keyboard.IsKeyDown(Keys.D)) velocity.X += 1;
