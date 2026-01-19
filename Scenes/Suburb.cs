@@ -23,7 +23,7 @@ public class Suburb : Scene
         _map = new Map(Game);
         _map.LoadMap("Content/suburb.tmx", "tileset.png", _player);
         TransitionManager.Initialize(Game.GraphicsDevice);
-        //_map.SpawnEnemies(Game.GraphicsDevice);
+        _map.SpawnEnemies(Game.GraphicsDevice);
         _npcDialog = new Dialog(Game, _player, "npc");
         _npcDialog.AddText("Hello, traveler! Welcome to the suburb.");
         _npcDialog.AddText("I hope you enjoy your stay here. Come back anytime!");

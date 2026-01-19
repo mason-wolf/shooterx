@@ -10,14 +10,14 @@ public class Enemy
     public Vector2 Position;
     public Rectangle Bounds;
     private Texture2D texture;
-    private float speed = 50f;
+    private float speed = 30f;
     private List<Vector2> path = new List<Vector2>();
     private int pathIndex = 0;
     private float updateTimer = 0f;
     private const float PATH_UPDATE_INTERVAL = 2f;
     public TmxMap Map;
 
-    public Enemy(GraphicsDevice graphicsDevice, Vector2 startPosition, TmxMap map)
+public Enemy(GraphicsDevice graphicsDevice, Vector2 startPosition, TmxMap map)
     {
         Position = startPosition;
         Bounds = new Rectangle((int)Position.X, (int)Position.Y, 16, 16);
@@ -25,32 +25,31 @@ public class Enemy
         texture.SetData(new[] { Color.Red });
         Map = map;
     }
-
-public void Update(GameTime gameTime, Vector2 playerPos)
-{
-    float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
-    updateTimer += delta;
-
-    if (updateTimer >= PATH_UPDATE_INTERVAL || pathIndex >= path.Count)
+    public void Update(GameTime gameTime, Vector2 playerPos)
     {
-        path = AStar(playerPos);
-        pathIndex = 0;
-        updateTimer = 0f;
+        float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
+        updateTimer += delta;
+
+        if (updateTimer >= PATH_UPDATE_INTERVAL || pathIndex >= path.Count)
+        {
+            path = AStar(playerPos);
+            pathIndex = 0;
+            updateTimer = 0f;
+        }
+
+        if (pathIndex < path.Count)
+        {
+            Vector2 target = path[pathIndex];
+            Vector2 dir = Vector2.Normalize(target - Position);
+
+            Position += dir * speed * delta;
+            Bounds.X = (int)Position.X;
+            Bounds.Y = (int)Position.Y;
+
+            if (Vector2.Distance(Position, target) < 8f)
+                pathIndex++;
+        }
     }
-
-    if (pathIndex < path.Count)
-    {
-        Vector2 target = path[pathIndex];
-        Vector2 dir = Vector2.Normalize(target - Position);
-
-        Position += dir * speed * delta;
-        Bounds.X = (int)Position.X;
-        Bounds.Y = (int)Position.Y;
-
-        if (Vector2.Distance(Position, target) < 8f)
-            pathIndex++;
-    }
-}
     private List<Vector2> AStar(Vector2 goal)
     {
         var openSet = new List<(Vector2 pos, float g, float h)>();
@@ -109,7 +108,6 @@ public void Update(GameTime gameTime, Vector2 playerPos)
         }
         return path;
     }
-
     public void Draw(SpriteBatch spriteBatch)
     {
         spriteBatch.Draw(texture, Bounds, Color.White);

@@ -22,38 +22,20 @@ public class Map : Scene
         _player = player;
     }
 
-    public void SpawnEnemies(GraphicsDevice graphicsDevice)
+public void SpawnEnemies(GraphicsDevice graphicsDevice)
+{
+    Enemies.Clear();
+
+    var objectLayer = _map.ObjectGroups.FirstOrDefault(l => l.Name == "enemy");
+
+    if (objectLayer == null) return;
+
+    foreach (var obj in objectLayer.Objects)
     {
-        Random rand = new Random();
-        int attempts = 0;
-        const float minDistFromPlayer = 80f;
-        const float minDistBetweenEnemies = 128f;
-
-        while (Enemies.Count < 10 && attempts < 1000)
-        {
-            int tx = (int)(_player.Position.X / _map.TileWidth) + rand.Next(-30, 31);
-            int ty = (int)(_player.Position.Y / _map.TileHeight) + rand.Next(-30, 31);
-
-            if (tx < 0 || tx >= _map.Width || ty < 0 || ty >= _map.Height)
-            { attempts++; continue; }
-
-            Vector2 candidatePos = new Vector2(tx * _map.TileWidth + 8, ty * _map.TileHeight + 8);
-
-            if (Vector2.Distance(candidatePos, _player.Position) < minDistFromPlayer)
-            { attempts++; continue; }
-
-            bool tooClose = Enemies.Any(e => Vector2.Distance(candidatePos, e.Position) < minDistBetweenEnemies);
-            if (tooClose) { attempts++; continue; }
-
-            var collisionLayer = _map.Layers.FirstOrDefault(l => l.Name == "collision");
-            var tile = collisionLayer?.Tiles[ty * _map.Width + tx];
-            if (tile?.Gid == 0)
-            {
-                Enemies.Add(new Enemy(graphicsDevice, candidatePos, _map));
-            }
-            attempts++;
-        }
+        Vector2 pos = new Vector2((float)obj.X + (float)obj.Width / 2, (float)obj.Y + (float)obj.Height / 2);
+        Enemies.Add(new Enemy(graphicsDevice, pos, _map));
     }
+}
 
     public override void Update(GameTime gameTime)
     {
