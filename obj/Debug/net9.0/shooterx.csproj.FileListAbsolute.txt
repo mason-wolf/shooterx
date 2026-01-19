@@ -1,7 +1,11 @@
 /home/mason/projects/shooterx/bin/Debug/net9.0/Content/Munro.xnb
+/home/mason/projects/shooterx/bin/Debug/net9.0/Content/shooter.xnb
+/home/mason/projects/shooterx/bin/Debug/net9.0/Content/tileset.tsx
 /home/mason/projects/shooterx/bin/Debug/net9.0/Content/tileset.xnb
 /home/mason/projects/shooterx/bin/Debug/net9.0/Content/cabin.tmx
 /home/mason/projects/shooterx/bin/Debug/net9.0/Content/suburb.tmx
+/home/mason/projects/shooterx/bin/Debug/net9.0/Content/shooter-export.png
+/home/mason/projects/shooterx/bin/Debug/net9.0/Content/shooter.png
 /home/mason/projects/shooterx/bin/Debug/net9.0/Content/tileset.png
 /home/mason/projects/shooterx/bin/Debug/net9.0/shooterx
 /home/mason/projects/shooterx/bin/Debug/net9.0/shooterx.deps.json
@@ -38,7 +42,3 @@
 /home/mason/projects/shooterx/obj/Debug/net9.0/shooterx.pdb
 /home/mason/projects/shooterx/obj/Debug/net9.0/shooterx.genruntimeconfig.cache
 /home/mason/projects/shooterx/obj/Debug/net9.0/ref/shooterx.dll
-/home/mason/projects/shooterx/bin/Debug/net9.0/Content/tileset.tsx
-/home/mason/projects/shooterx/bin/Debug/net9.0/Content/shooter.xnb
-/home/mason/projects/shooterx/bin/Debug/net9.0/Content/shooter-export.png
-/home/mason/projects/shooterx/bin/Debug/net9.0/Content/shooter.png

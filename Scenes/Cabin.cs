@@ -6,6 +6,7 @@ public class Cabin : Scene
     Player _player;
     Map _map;
     Camera _camera;
+    Dialog _cabinComputerDialog;
     public Cabin(Game game, Player player, Camera camera) : base(game)
     {
         _player = player;
@@ -16,6 +17,12 @@ public class Cabin : Scene
     {
         _map = new Map(Game);
         _map.LoadMap("Content/cabin.tmx", "tileset.png", _player);
+        _cabinComputerDialog = new Dialog(Game, _player, "cabin_computer");
+        _cabinComputerDialog.SetInteractionText("(E) Access Computer");
+        _cabinComputerDialog.AddText("You have an email from an unknown sender.");
+        _cabinComputerDialog.AddText("'It's not real. None of it is.'");
+        _cabinComputerDialog.AddText("--Check out ChartUpCorp's new Human-Charged Battery Cells!--");
+        _cabinComputerDialog.AddText("The rest of the email is unreadable because of so many ads.");
     }
 
     public override void Update(GameTime gameTime)
@@ -44,6 +51,8 @@ public class Cabin : Scene
             // but since its the first scene loaded it needs it.
             .SetScene(new Suburb(Game, teleportPos, _camera))
             .Execute();
+        
+        _cabinComputerDialog.Update(gameTime);
     }
 
     public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
@@ -52,6 +61,7 @@ public class Cabin : Scene
         _map.Draw(spriteBatch, gameTime);
         _player.Draw(spriteBatch);
         TransitionManager.Draw(spriteBatch, new Rectangle(0, 0, 1920, 1080));
+        _cabinComputerDialog.Draw(spriteBatch, gameTime);
         spriteBatch.End();
     }
 }

@@ -8,7 +8,7 @@ public class Suburb : Scene
     private Player _player;
     private Camera _camera;
     private Vector2 _startPosition;
-    private Dialog _dialog;
+    private Dialog _npcDialog;
     public Suburb(Game game, Vector2 startPosition, Camera camera) : base(game)
     {
         _startPosition = startPosition;
@@ -23,7 +23,9 @@ public class Suburb : Scene
         _map.LoadMap("Content/suburb.tmx", "tileset.png", _player);
         TransitionManager.Initialize(Game.GraphicsDevice);
         //_map.SpawnEnemies(Game.GraphicsDevice);
-        _dialog = new Dialog(Game, _player);
+        _npcDialog = new Dialog(Game, _player, "npc");
+        _npcDialog.AddText("Hello, traveler! Welcome to the suburb.");
+        _npcDialog.AddText("I hope you enjoy your stay here. Come back anytime!");
     }
 
     public override void Update(GameTime gameTime)
@@ -48,7 +50,7 @@ public class Suburb : Scene
             .SetStartingPosition(new Vector2(422, 600))
             .Execute();
 
-        _dialog.Update(gameTime);
+        _npcDialog.Update(gameTime);
 
     }
 
@@ -58,9 +60,9 @@ public class Suburb : Scene
         spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: _camera.GetViewMatrix());
         _map.Draw(spriteBatch, gameTime);
         _player.Draw(spriteBatch);
-        DebugOverlay.Draw(spriteBatch, _player.Position);
+      //  DebugOverlay.Draw(spriteBatch, _player.Position);
         TransitionManager.Draw(spriteBatch, new Rectangle(0, 0, 1920, 1080));
-        _dialog.Draw(spriteBatch, gameTime);
+        _npcDialog.Draw(spriteBatch, gameTime);
 
         spriteBatch.End();
     }
