@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.8" tiledversion="1.8.0" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="23">
  <tileset firstgid="1" source="tileset.tsx"/>
- <objectgroup id="6" name="enemy">
-  <object id="21" name="enemy" x="62" y="44.5455" width="13.8182" height="10.9091"/>
-  <object id="22" name="enemy" x="62.1818" y="132.909" width="17.4545" height="14.3636"/>
- </objectgroup>
+ <objectgroup id="6" name="enemy"/>
  <layer id="1" name="main" width="64" height="64">
   <data encoding="csv">
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,

@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
@@ -12,6 +13,7 @@ public class Map : Scene
     public List<Enemy> Enemies { get; private set; } = new List<Enemy>();
     private Player _player;
     private ItemPickupManager _itemPickupManager;
+    private List<Rectangle> Interactables = new List<Rectangle>();
     public Map(Game game) : base(game) { }
 
     public void LoadMap(string mapPath, string tilesetPath, Player player)
@@ -21,6 +23,28 @@ public class Map : Scene
         GameState.CurrentMap = _map;
         _player = player;
         _itemPickupManager = new ItemPickupManager(Game, _map, _player);
+        LoadInteractables();
+    }
+
+    public void LoadInteractables()
+    {
+        foreach (var layer in _map.ObjectGroups)
+        {
+            foreach (var obj in layer.Objects)
+            {
+                if (obj.Name == "save")
+                {
+                    Rectangle saveRect = new Rectangle(
+                            (int)obj.X,
+                            (int)obj.Y,
+                            (int)obj.Width,
+                            (int)obj.Height
+                        );
+
+                    Interactables.Add(saveRect);
+                }
+            }
+        }
     }
 
     public void SpawnEnemies(Game game)
@@ -48,6 +72,13 @@ public class Map : Scene
 
         _itemPickupManager.Update(gameTime);
 
+        foreach (Rectangle rect in Interactables)
+        {
+            if (_player.Bounds.Intersects(rect))
+            {
+               // Console.WriteLine("save");
+            }
+        }
     }
 
     /// <summary>
@@ -71,6 +102,7 @@ public class Map : Scene
 
     public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
     {
+
         foreach (TmxLayer layer in _map.Layers)
         {
             if (!layer.Visible) continue;

@@ -9,4 +9,10 @@ public static void Draw(SpriteBatch spriteBatch, Vector2 playerPosition)
     Vector2 textPos = new Vector2(playerPosition.X, playerPosition.Y - 5);
     spriteBatch.DrawString(GameState.Font, text, textPos, Color.White, 0f, Vector2.Zero, 0.3f, SpriteEffects.None, 0f);
 }
+
+public static void ShowText(SpriteBatch spriteBatch, Vector2 playerPosition, string text)
+{
+    Vector2 textPos = new Vector2(playerPosition.X, playerPosition.Y - 5);
+    spriteBatch.DrawString(GameState.Font, text, textPos, Color.White, 0f, Vector2.Zero, 0.3f, SpriteEffects.None, 0f);
+}
 }
