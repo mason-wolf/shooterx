@@ -5,6 +5,7 @@ Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Siz
 "/home/mason/projects/shooterx/Content/money.png","/home/mason/projects/shooterx/Content/bin/DesktopGL/Content/money.xnb","TextureProcessor","Texture2DContent",147,1109,0.3797267
 "/home/mason/projects/shooterx/Content/Munro.spritefont","/home/mason/projects/shooterx/Content/bin/DesktopGL/Content/Munro.xnb","FontDescriptionProcessor","SpriteFontContent",2012,21529,0.3361774
 "/home/mason/projects/shooterx/Content/note.png","/home/mason/projects/shooterx/Content/bin/DesktopGL/Content/note.xnb","TextureProcessor","Texture2DContent",116,1109,0.3296518
+"/home/mason/projects/shooterx/Content/object-key.png","/home/mason/projects/shooterx/Content/bin/DesktopGL/Content/object-key.xnb","TextureProcessor","Texture2DContent",179,1109,0.1577533
 "/home/mason/projects/shooterx/Content/shooter.png","/home/mason/projects/shooterx/Content/bin/DesktopGL/Content/shooter.xnb","TextureProcessor","Texture2DContent",498,9301,0.1641652
 "/home/mason/projects/shooterx/Content/thug-1.png","/home/mason/projects/shooterx/Content/bin/DesktopGL/Content/thug-1.xnb","TextureProcessor","Texture2DContent",517,9301,0.1822582
 "/home/mason/projects/shooterx/Content/tileset.png","/home/mason/projects/shooterx/Content/bin/DesktopGL/Content/tileset.xnb","TextureProcessor","Texture2DContent",1531,262229,0.2401934

@@ -16,6 +16,10 @@ public class WorldObjects : Scene
 
         Texture2D money = _game.Content.Load<Texture2D>("money");
         TextureManager.MoneyTexture = money;
+
+        Texture2D key = _game.Content.Load<Texture2D>("object-key");
+        TextureManager.KeyTexture = key;
+
         base.LoadContent();
     }
 }

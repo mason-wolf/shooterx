@@ -7,6 +7,7 @@ public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
+    private WorldObjects _worldObjects;
 
     public Game1()
     {
@@ -29,6 +30,8 @@ public class Game1 : Game
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
+        _worldObjects = new WorldObjects(this);
+        _worldObjects.LoadContent();
     }
 
     protected override void Update(GameTime gameTime)

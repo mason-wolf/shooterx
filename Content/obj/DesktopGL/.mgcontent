@@ -10,11 +10,13 @@
     <File>/home/mason/projects/shooterx/Content/money.png</File>
     <File>/home/mason/projects/shooterx/Content/Munro.spritefont</File>
     <File>/home/mason/projects/shooterx/Content/note.png</File>
+    <File>/home/mason/projects/shooterx/Content/object-key.png</File>
     <File>/home/mason/projects/shooterx/Content/shooter.png</File>
     <File>/home/mason/projects/shooterx/Content/thug-1.png</File>
     <File>/home/mason/projects/shooterx/Content/tileset.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

@@ -7,4 +7,5 @@ public abstract class Entity
     public int FirstAidKits = 1;
 
     public int Money = 0;
+    public int ObjectKeys = 0;
 }

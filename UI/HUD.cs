@@ -16,7 +16,7 @@ public void Draw(SpriteBatch spriteBatch, Player player)
     const int height = 25;
     const int margin = 10;
     const int ammoGap = 15;
-    const int ammoIconSize = 24;
+    const int iconSize = 24;
 
     float healthRatio = player.Health / 100f;
     int fillWidth = (int)(width * healthRatio);
@@ -28,11 +28,11 @@ public void Draw(SpriteBatch spriteBatch, Player player)
         new Color(200 - (int)(170 * healthRatio), 30 + (int)(170 * healthRatio), 30));
 
     int ammoX = margin + width + ammoGap;
-    int ammoY = margin + (height - ammoIconSize) / 2;
+    int ammoY = margin + (height - iconSize) / 2;
 
     // Ammo
     spriteBatch.Draw(TextureManager.AmmoTexture, 
-        new Rectangle(ammoX, ammoY, ammoIconSize, ammoIconSize), 
+        new Rectangle(ammoX, ammoY, iconSize, iconSize), 
         Color.White);
 
 
@@ -42,7 +42,7 @@ public void Draw(SpriteBatch spriteBatch, Player player)
 
     // First Aid Kit
     spriteBatch.Draw(TextureManager.FirstAidKitTexture,
-        new Rectangle(ammoX + 80, ammoY, ammoIconSize, ammoIconSize),
+        new Rectangle(ammoX + 80, ammoY, iconSize, iconSize),
         Color.White);
 
     spriteBatch.DrawString(GameState.Font, player.FirstAidKits.ToString(),
@@ -51,11 +51,20 @@ public void Draw(SpriteBatch spriteBatch, Player player)
 
     // Money
     spriteBatch.Draw(TextureManager.MoneyTexture,
-        new Rectangle(ammoX + 150, 10, ammoIconSize, ammoIconSize),
+        new Rectangle(ammoX + 150, 10, iconSize, iconSize),
         Color.White);
 
     spriteBatch.DrawString(GameState.Font, "$ " + player.Money.ToString(),
         new Vector2(ammoX + 195, 12),
+        Color.White, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 0f);
+
+    // Keys
+    spriteBatch.Draw(TextureManager.KeyTexture,
+        new Rectangle(ammoX + 240, 10, iconSize, iconSize),
+        Color.White);
+
+    spriteBatch.DrawString(GameState.Font, player.ObjectKeys.ToString(),
+        new Vector2(ammoX + 275, 12),
         Color.White, 0f, Vector2.Zero, 1.5f, SpriteEffects.None, 0f);
 
 }

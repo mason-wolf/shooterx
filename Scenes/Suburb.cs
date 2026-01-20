@@ -10,7 +10,6 @@ public class Suburb : Scene
     private Vector2 _startPosition;
     private Dialog _npcDialog;
     private HUD _hud;
-    private WorldObjects _worldObjects;
     public Suburb(Game game, Vector2 startPosition, Camera camera) : base(game)
     {
         _startPosition = startPosition;
@@ -30,8 +29,6 @@ public class Suburb : Scene
         _npcDialog.AddText("I hope you enjoy your stay here. Come back anytime!");
 
         _hud = new HUD(Game.GraphicsDevice);
-        _worldObjects = new WorldObjects(Game);
-        _worldObjects.LoadContent();
     }
 
     public override void Update(GameTime gameTime)

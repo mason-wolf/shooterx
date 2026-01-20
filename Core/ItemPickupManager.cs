@@ -49,13 +49,22 @@ public class ItemPickupManager : Scene
                 item.Texture = TextureManager.AmmoTexture;
                 items.Add(item);
             }
+
+            if (obj.Name == "key")
+            {
+                Item item = new Item();
+                item.Name = "key";
+                item.Position = new Vector2((float)obj.X, (float)obj.Y);
+                item.Texture = TextureManager.KeyTexture;
+                items.Add(item);
+            }
         }
 
     }
 
     public override void Update(GameTime gameTime)
     {
-        foreach(Item item in items)
+        foreach (Item item in items)
         {
             if (_player.Bounds.Intersects(item.Bounds) && !item.PickedUp && item.Name == "first_aid_kit")
             {
@@ -74,6 +83,12 @@ public class ItemPickupManager : Scene
                 item.PickedUp = true;
                 _player.Ammo += 3;
             }
+
+            if (_player.Bounds.Intersects(item.Bounds) && !item.PickedUp && item.Name == "key")
+            {
+                item.PickedUp = true;
+                _player.ObjectKeys += 1;
+            }
         }
     }
 
@@ -84,7 +99,7 @@ public class ItemPickupManager : Scene
         {
             if (!item.PickedUp)
             {
-                spriteBatch.Draw(item.Texture, item.Position, Color.White);   
+                spriteBatch.Draw(item.Texture, item.Position, Color.White);
             }
         }
     }

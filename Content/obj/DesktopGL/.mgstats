@@ -1,10 +1,11 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"/home/mason/projects/shooterx/Content/ammo.png","/home/mason/projects/shooterx/Content/bin/DesktopGL/ammo.xnb","TextureProcessor","Texture2DContent",190,1109,0.4465229
-"/home/mason/projects/shooterx/Content/bullet.png","/home/mason/projects/shooterx/Content/bin/DesktopGL/bullet.xnb","TextureProcessor","Texture2DContent",102,1109,0.0045089
-"/home/mason/projects/shooterx/Content/health-pack.png","/home/mason/projects/shooterx/Content/bin/DesktopGL/health-pack.xnb","TextureProcessor","Texture2DContent",183,1109,0.0041775
-"/home/mason/projects/shooterx/Content/money.png","/home/mason/projects/shooterx/Content/bin/DesktopGL/money.xnb","TextureProcessor","Texture2DContent",147,1109,0.3923049
-"/home/mason/projects/shooterx/Content/Munro.spritefont","/home/mason/projects/shooterx/Content/bin/DesktopGL/Munro.xnb","FontDescriptionProcessor","SpriteFontContent",2012,21529,0.1887071
-"/home/mason/projects/shooterx/Content/note.png","/home/mason/projects/shooterx/Content/bin/DesktopGL/note.xnb","TextureProcessor","Texture2DContent",116,1109,0.0011709
-"/home/mason/projects/shooterx/Content/shooter.png","/home/mason/projects/shooterx/Content/bin/DesktopGL/shooter.xnb","TextureProcessor","Texture2DContent",498,9301,0.003734
-"/home/mason/projects/shooterx/Content/thug-1.png","/home/mason/projects/shooterx/Content/bin/DesktopGL/thug-1.xnb","TextureProcessor","Texture2DContent",517,9301,0.0057815
-"/home/mason/projects/shooterx/Content/tileset.png","/home/mason/projects/shooterx/Content/bin/DesktopGL/tileset.xnb","TextureProcessor","Texture2DContent",1531,262229,0.0337833
+"/home/mason/projects/shooterx/Content/ammo.png","/home/mason/projects/shooterx/Content/bin/DesktopGL/ammo.xnb","TextureProcessor","Texture2DContent",190,1109,0.1777906
+"/home/mason/projects/shooterx/Content/bullet.png","/home/mason/projects/shooterx/Content/bin/DesktopGL/bullet.xnb","TextureProcessor","Texture2DContent",102,1109,0.0031051
+"/home/mason/projects/shooterx/Content/health-pack.png","/home/mason/projects/shooterx/Content/bin/DesktopGL/health-pack.xnb","TextureProcessor","Texture2DContent",183,1109,0.0038153
+"/home/mason/projects/shooterx/Content/money.png","/home/mason/projects/shooterx/Content/bin/DesktopGL/money.xnb","TextureProcessor","Texture2DContent",147,1109,0.0016634
+"/home/mason/projects/shooterx/Content/Munro.spritefont","/home/mason/projects/shooterx/Content/bin/DesktopGL/Munro.xnb","FontDescriptionProcessor","SpriteFontContent",2012,21529,0.1510033
+"/home/mason/projects/shooterx/Content/note.png","/home/mason/projects/shooterx/Content/bin/DesktopGL/note.xnb","TextureProcessor","Texture2DContent",116,1109,0.0013205
+"/home/mason/projects/shooterx/Content/object-key.png","/home/mason/projects/shooterx/Content/bin/DesktopGL/object-key.xnb","TextureProcessor","Texture2DContent",179,1109,0.1433122
+"/home/mason/projects/shooterx/Content/shooter.png","/home/mason/projects/shooterx/Content/bin/DesktopGL/shooter.xnb","TextureProcessor","Texture2DContent",498,9301,0.0017889
+"/home/mason/projects/shooterx/Content/thug-1.png","/home/mason/projects/shooterx/Content/bin/DesktopGL/thug-1.xnb","TextureProcessor","Texture2DContent",517,9301,0.0024506
+"/home/mason/projects/shooterx/Content/tileset.png","/home/mason/projects/shooterx/Content/bin/DesktopGL/tileset.xnb","TextureProcessor","Texture2DContent",1531,262229,0.0258848

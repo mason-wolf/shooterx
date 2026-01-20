@@ -6,4 +6,5 @@ public static class TextureManager
     public static Texture2D FirstAidKitTexture { get; set; }
     public static Texture2D NoteTexture { get; set; }
     public static Texture2D MoneyTexture { get; set; }
+    public static Texture2D KeyTexture { get; set; }
 }
