@@ -1,9 +1,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using TiledSharp;
 
 public class Map : Scene
@@ -13,8 +15,12 @@ public class Map : Scene
     public List<Enemy> Enemies { get; private set; } = new List<Enemy>();
     private Player _player;
     private ItemPickupManager _itemPickupManager;
-    private List<Rectangle> Interactables = new List<Rectangle>();
-    public Map(Game game) : base(game) { }
+    private List<InteractableObject> _interactables = new List<InteractableObject>();
+    Game _game;
+    public Map(Game game) : base(game)
+    {
+        _game = game;
+    }
 
     public void LoadMap(string mapPath, string tilesetPath, Player player)
     {
@@ -34,14 +40,18 @@ public class Map : Scene
             {
                 if (obj.Name == "save")
                 {
-                    Rectangle saveRect = new Rectangle(
+                    InteractionPrompt savePoint = new(_game);
+
+                    savePoint.Rectangle = new Rectangle(
                             (int)obj.X,
                             (int)obj.Y,
                             (int)obj.Width,
                             (int)obj.Height
                         );
 
-                    Interactables.Add(saveRect);
+                    savePoint.SetInteractionText("(E) Save Game");
+
+                    _interactables.Add(savePoint);
                 }
             }
         }
@@ -65,20 +75,24 @@ public class Map : Scene
         GameState.Enemies = Enemies;
     }
 
+    private KeyboardState _prevKeyboard;
+
     public override void Update(GameTime gameTime)
     {
-        foreach (var enemy in Enemies)
-            enemy.Update(gameTime, _player);
+        var keyboard = Keyboard.GetState();
 
-        _itemPickupManager.Update(gameTime);
-
-        foreach (Rectangle rect in Interactables)
+        foreach (InteractableObject obj in _interactables)
         {
-            if (_player.Bounds.Intersects(rect))
+            if (_player.Bounds.Intersects(obj.Rectangle))
             {
-               // Console.WriteLine("save");
+                if (keyboard.IsKeyDown(Keys.E) && !_prevKeyboard.IsKeyDown(Keys.E))
+                {
+                    obj.Interact();
+                }
             }
         }
+
+        _prevKeyboard = keyboard;
     }
 
     /// <summary>
@@ -129,6 +143,19 @@ public class Map : Scene
             if (enemy.Health > 0)
             {
                 enemy.Draw(spriteBatch);
+            }
+        }
+
+        foreach (var obj in _interactables)
+        {
+            if (_player.Bounds.Intersects(obj.Rectangle))
+            {
+                var pos = new Vector2((float)_player.Position.X, (float)_player.Position.Y - 15);
+                spriteBatch.DrawString(GameState.Font, obj.GetInteractionText(), pos, new Color(100, 255, 100), 0f, Vector2.Zero, .3f, SpriteEffects.None, 0f);
+            }
+            else
+            {
+                obj.ResetState();
             }
         }
 
