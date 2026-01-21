@@ -16,6 +16,7 @@ public class Map : Scene
     private Player _player;
     private ItemPickupManager _itemPickupManager;
     private List<InteractableObject> _interactables = new List<InteractableObject>();
+    private List<Collidable> _collidables = new List<Collidable>();
     Game _game;
     public Map(Game game) : base(game)
     {
@@ -30,6 +31,37 @@ public class Map : Scene
         _player = player;
         _itemPickupManager = new ItemPickupManager(Game, _map, _player);
         LoadInteractables();
+        LoadCollidables();
+    }
+
+    public void LoadCollidables()
+    {
+        _collidables.Clear();
+
+        foreach (var layer in _map.ObjectGroups)
+        {
+            foreach (var obj in layer.Objects)
+            {
+                if (obj.Name == "locked-gate")
+                {
+                    var gateRect = new Rectangle(
+                        (int)obj.X,
+                        (int)obj.Y,
+                        (int)obj.Width,
+                        (int)obj.Height
+                    );
+
+                    Collidable _lockedGate = new(Game, _player);
+                    _lockedGate.Rectangle = gateRect;
+                    _lockedGate.Name = "locked-gate";
+
+                    // Track collidable for player collision detection.
+                    if (!_collidables.Contains(_lockedGate))
+                        _collidables.Add(_lockedGate);
+                }
+            }
+        }
+        GameState.Collidables = _collidables;
     }
 
     public void LoadInteractables()
@@ -38,20 +70,21 @@ public class Map : Scene
         {
             foreach (var obj in layer.Objects)
             {
-                if (obj.Name == "save")
+                if (obj.Name == "locked-gate-prompt")
                 {
-                    InteractionPrompt savePoint = new(_game);
 
-                    savePoint.Rectangle = new Rectangle(
+                    LockedGate lockedGate = new(_game, _player);
+
+                    lockedGate.Rectangle = new Rectangle(
                             (int)obj.X,
                             (int)obj.Y,
                             (int)obj.Width,
                             (int)obj.Height
                         );
 
-                    savePoint.SetInteractionText("(E) Save Game");
+                    lockedGate.SetInteractionText("(E) Open");
 
-                    _interactables.Add(savePoint);
+                    _interactables.Add(lockedGate);
                 }
             }
         }
@@ -110,6 +143,20 @@ public class Map : Scene
                     Vector2 pos = new Vector2((float)obj.X, (float)obj.Y);
                     spriteBatch.Draw(TextureManager.NoteTexture, pos, null, Color.White);
                 }
+
+                if (obj.Name == "locked-gate")
+                {
+                    Vector2 pos = new Vector2((float)obj.X, (float)obj.Y);
+                    var lockedGate = TextureManager.LockedGate;
+
+                    foreach (Collidable collidable in GameState.Collidables)
+                    {
+                        if ((obj.Name == collidable.Name) && !collidable.Destroyed)
+                        {
+                            spriteBatch.Draw(lockedGate, pos, null, Color.White);
+                        }
+                    }
+                }
             }
         }
     }
@@ -146,9 +193,12 @@ public class Map : Scene
             }
         }
 
+
+        DrawMapObjects(spriteBatch);
+
         foreach (var obj in _interactables)
         {
-            if (_player.Bounds.Intersects(obj.Rectangle))
+            if (_player.Bounds.Intersects(obj.Rectangle) && !obj.Destroyed)
             {
                 var pos = new Vector2((float)_player.Position.X, (float)_player.Position.Y - 15);
                 spriteBatch.DrawString(GameState.Font, obj.GetInteractionText(), pos, new Color(100, 255, 100), 0f, Vector2.Zero, .3f, SpriteEffects.None, 0f);
@@ -159,7 +209,6 @@ public class Map : Scene
             }
         }
 
-        DrawMapObjects(spriteBatch);
         _itemPickupManager.Draw(spriteBatch, gameTime);
     }
 }

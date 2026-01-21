@@ -56,3 +56,5 @@
 /home/mason/projects/shooterx/obj/Debug/net9.0/ref/shooterx.dll
 /home/mason/projects/shooterx/bin/Debug/net9.0/Content/object-key.xnb
 /home/mason/projects/shooterx/bin/Debug/net9.0/Content/object-key.png
+/home/mason/projects/shooterx/bin/Debug/net9.0/Content/locked-gate.xnb
+/home/mason/projects/shooterx/bin/Debug/net9.0/Content/locked-gate.png

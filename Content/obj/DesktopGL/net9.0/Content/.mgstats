@@ -2,6 +2,7 @@ Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Siz
 "/home/mason/projects/shooterx/Content/ammo.png","/home/mason/projects/shooterx/Content/bin/DesktopGL/Content/ammo.xnb","TextureProcessor","Texture2DContent",190,1109,0.350984
 "/home/mason/projects/shooterx/Content/bullet.png","/home/mason/projects/shooterx/Content/bin/DesktopGL/Content/bullet.xnb","TextureProcessor","Texture2DContent",102,1109,0.1780724
 "/home/mason/projects/shooterx/Content/health-pack.png","/home/mason/projects/shooterx/Content/bin/DesktopGL/Content/health-pack.xnb","TextureProcessor","Texture2DContent",183,1109,0.4409436
+"/home/mason/projects/shooterx/Content/locked-gate.png","/home/mason/projects/shooterx/Content/bin/DesktopGL/Content/locked-gate.xnb","TextureProcessor","Texture2DContent",163,1109,0.1588177
 "/home/mason/projects/shooterx/Content/money.png","/home/mason/projects/shooterx/Content/bin/DesktopGL/Content/money.xnb","TextureProcessor","Texture2DContent",147,1109,0.3797267
 "/home/mason/projects/shooterx/Content/Munro.spritefont","/home/mason/projects/shooterx/Content/bin/DesktopGL/Content/Munro.xnb","FontDescriptionProcessor","SpriteFontContent",2012,21529,0.3361774
 "/home/mason/projects/shooterx/Content/note.png","/home/mason/projects/shooterx/Content/bin/DesktopGL/Content/note.xnb","TextureProcessor","Texture2DContent",116,1109,0.3296518

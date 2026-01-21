@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using TiledSharp;
 
@@ -24,6 +25,12 @@ public static class GameState
     /// List of all enemies in the current game state.
     /// </summary>
     public static List<Enemy> Enemies = new List<Enemy>();
+
+    /// <summary>
+    /// List of custom map objects that are collidable.
+    /// Track them for collision and object manipulation.
+    /// </summary>
+    public static List<Collidable> Collidables = new List<Collidable>();
     public static void ChangeScene(Scene newScene)
     {
         CurrentScene?.UnloadContent();

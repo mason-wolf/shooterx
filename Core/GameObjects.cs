@@ -1,10 +1,10 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-public class WorldObjects : Scene
+public class GameObjects : Scene
 {
     private Game _game;
-    public WorldObjects(Game game) : base(game)
+    public GameObjects(Game game) : base(game)
     {
         _game = game;
     }
@@ -20,6 +20,8 @@ public class WorldObjects : Scene
         Texture2D key = _game.Content.Load<Texture2D>("object-key");
         TextureManager.KeyTexture = key;
 
+        Texture2D lockedGate = _game.Content.Load<Texture2D>("locked-gate");
+        TextureManager.LockedGate = lockedGate;
         base.LoadContent();
     }
 }

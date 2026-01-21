@@ -34,7 +34,7 @@ public class Player : Entity
         Texture2D firstKitIcon = game.Content.Load<Texture2D>("health-pack");
         TextureManager.AmmoTexture = ammoIcon;
         TextureManager.FirstAidKitTexture = firstKitIcon;
-        
+
         _texture = game.Content.Load<Texture2D>("shooter");
 
         for (int i = 0; i < 3; i++)
@@ -144,7 +144,7 @@ public class Player : Entity
         }
     }
 
-    
+
     public void HandleShooting(GameTime gameTime, Game game)
     {
         shootTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -199,24 +199,29 @@ public class Player : Entity
     }
     private bool CheckTileCollision(TmxLayer collisionLayer, int tw, int th)
     {
+
         int left = (int)(Position.X / tw);
-        int right = (int)((Position.X + Bounds.Width) / tw);
+        int right = (int)((Position.X + Bounds.Width - 1) / tw);
         int top = (int)(Position.Y / th);
-        int bottom = (int)((Position.Y + Bounds.Height) / th);
+        int bottom = (int)((Position.Y + Bounds.Height - 1) / th);
 
         for (int y = top; y <= bottom; y++)
-        {
             for (int x = left; x <= right; x++)
             {
                 if (x < 0 || y < 0 || x >= GameState.CurrentMap.Width || y >= GameState.CurrentMap.Height) continue;
 
                 var tile = collisionLayer.Tiles[y * GameState.CurrentMap.Width + x];
-                if (tile.Gid == 0) continue;
-
-                Rectangle tileRect = new Rectangle(x * tw, y * th, tw, th);
-                if (Bounds.Intersects(tileRect)) return true;
+                if (tile.Gid != 0)
+                {
+                    Rectangle tileRect = new Rectangle(x * tw, y * th, tw, th);
+                    if (Bounds.Intersects(tileRect)) return true;
+                }
             }
-        }
+
+        foreach (Collidable collidable in GameState.Collidables)
+            if (Bounds.Intersects(collidable.Rectangle) && !collidable.Destroyed)
+                return true;
+
         return false;
     }
 
