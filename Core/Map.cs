@@ -112,6 +112,11 @@ public class Map : Scene
 
     public override void Update(GameTime gameTime)
     {
+
+        foreach (var enemy in Enemies)
+            enemy.Update(gameTime, _player);
+
+        _itemPickupManager.Update(gameTime);
         var keyboard = Keyboard.GetState();
 
         foreach (InteractableObject obj in _interactables)
@@ -192,7 +197,6 @@ public class Map : Scene
                 enemy.Draw(spriteBatch);
             }
         }
-
 
         DrawMapObjects(spriteBatch);
 

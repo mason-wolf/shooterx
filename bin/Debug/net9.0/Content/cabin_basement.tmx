@@ -41,10 +41,10 @@
   <object id="1" name="cabin" x="157.405" y="195.633" width="11.3976" height="9.40863"/>
  </objectgroup>
  <objectgroup id="5" name="items">
-  <object id="4" name="key" x="335.405" y="187.827" width="16.5467" height="17.8883"/>
+  <object id="4" name="key" x="321.095" y="182.908" width="16.5467" height="17.8883"/>
  </objectgroup>
  <objectgroup id="4" name="enemy">
-  <object id="2" name="enemy" x="333.442" y="248.822" width="19.1402" height="15.1107"/>
+  <object id="2" name="enemy" x="320.92" y="244.35" width="19.1402" height="15.1107"/>
  </objectgroup>
  <layer id="2" name="collision" width="32" height="32">
   <data encoding="csv">
