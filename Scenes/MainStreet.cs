@@ -1,13 +1,14 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-public class Template: Scene
+public class MainStreet : Scene
 {
     Player _player;
     Map _map;
     Camera _camera;
+    HUD _hud;
 
-    public Template(Game game, Player player, Camera camera) : base(game)
+    public MainStreet(Game game, Player player, Camera camera) : base(game)
     {
         _player = player;
         _camera = camera;
@@ -16,8 +17,9 @@ public class Template: Scene
     public override void LoadContent()
     {
         _map = new Map(Game);
-        _map.LoadMap("Content/<map_name>.tmx", "tileset.png", _player);
+        _map.LoadMap("Content/main_street.tmx", "tileset.png", _player);
         _map.SpawnEnemies(Game);
+        _hud = new HUD(Game.GraphicsDevice);
     }
 
     public override void Update(GameTime gameTime)
@@ -33,6 +35,14 @@ public class Template: Scene
             return;
         }
 
+            new TeleportBuilder()
+        .SetGameTime(gameTime)
+        .SetTeleporterName("suburb")
+        .SetPlayer(_player)
+        .SetCamera(_camera)
+        .SetScene(new Suburb(Game, new Vector2(240, 12), _camera))
+        .SetStartingPosition(new Vector2(50, 890))
+        .Execute();
     }
 
     public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
@@ -42,6 +52,11 @@ public class Template: Scene
         _player.Draw(spriteBatch);
         DebugOverlay.Draw(spriteBatch, _player.Position);
         TransitionManager.Draw(spriteBatch, new Rectangle(0, 0, 1920, 1080));
+        spriteBatch.End();
+
+
+        spriteBatch.Begin(transformMatrix: Matrix.Identity);
+        _hud.Draw(spriteBatch, _player);
         spriteBatch.End();
     }
 }

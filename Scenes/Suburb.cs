@@ -53,6 +53,15 @@ public class Suburb : Scene
             .SetStartingPosition(new Vector2(422, 600))
             .Execute();
 
+        new TeleportBuilder()
+            .SetGameTime(gameTime)
+            .SetTeleporterName("main_street")
+            .SetPlayer(_player)
+            .SetCamera(_camera)
+            .SetScene(new MainStreet(Game, _player, _camera))
+            .SetStartingPosition(new Vector2(80, 992))
+            .Execute();
+
         _npcDialog.Update(gameTime);
 
     }
@@ -63,7 +72,6 @@ public class Suburb : Scene
         spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: _camera.GetViewMatrix());
         _map.Draw(spriteBatch, gameTime);
         _player.Draw(spriteBatch);
-      //  DebugOverlay.Draw(spriteBatch, _player.Position);
         TransitionManager.Draw(spriteBatch, new Rectangle(0, 0, 1920, 1080));
         _npcDialog.Draw(spriteBatch, gameTime);
         spriteBatch.End();
