@@ -8,15 +8,18 @@ public class Game1 : Game
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     private GameObjects _worldObjects;
-
+    private bool _isFullScreen = true;
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
-        // _graphics.HardwareModeSwitch = false; 
-        // _graphics.PreferredBackBufferWidth = 1920;    
-        // _graphics.PreferredBackBufferHeight = 1080;    
-        // _graphics.IsFullScreen = true;
-        // _graphics.ApplyChanges();
+        if (_isFullScreen)
+        {   
+        _graphics.HardwareModeSwitch = false; 
+        _graphics.PreferredBackBufferWidth = 1920;    
+        _graphics.PreferredBackBufferHeight = 1080;    
+        _graphics.IsFullScreen = true;
+        _graphics.ApplyChanges();
+        }
         Content.RootDirectory = "Content";
         IsMouseVisible = false;
     }
