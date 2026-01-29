@@ -59,3 +59,4 @@
 /home/mason/projects/shooterx/bin/Debug/net9.0/Content/locked-gate.xnb
 /home/mason/projects/shooterx/bin/Debug/net9.0/Content/locked-gate.png
 /home/mason/projects/shooterx/bin/Debug/net9.0/Content/main_street.tmx
+/home/mason/projects/shooterx/bin/Debug/net9.0/Content/main_streetv1.tmx

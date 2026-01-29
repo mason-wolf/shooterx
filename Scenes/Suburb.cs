@@ -21,7 +21,7 @@ public class Suburb : Scene
 
         _player = new Player(Game, _startPosition);
         _map = new Map(Game);
-        _map.LoadMap("Content/suburb.tmx", "tileset.png", _player);
+        _map.LoadMap("Content/main_street.tmx", "tileset.png", _player);
         TransitionManager.Initialize(Game.GraphicsDevice);
         _map.SpawnEnemies(Game);
         _npcDialog = new Dialog(Game, _player, "npc");

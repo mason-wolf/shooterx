@@ -6,7 +6,7 @@ public class MainMenu : Scene
 {
     SpriteFont _font;
     public MainMenu(Game game) : base(game) { }
-    Vector2 PLAYER_START_POSITION = new Vector2(100, 50);
+    Vector2 PLAYER_START_POSITION = new Vector2(70, 700);
     public override void LoadContent()
     {
         _font = Game.Content.Load<SpriteFont>("Munro");
