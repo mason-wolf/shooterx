@@ -1,0 +1,123 @@
+Game Design Document - "ShooterX"
+
+        Version 1.0.0
+
+    Date 30 January 2026
+
+
+Table of Contents
+
+    1. Background
+    2. Core Gameplay Loop
+    3. Theme
+    4. Levels
+    5. Requirements
+    6. Lessons Learned
+    7. Change Log
+
+    
+1. Background 
+
+    1.1     In thear 2120, a mysterious character with the alias “shooter”
+    is mentally trapped inside a mind-chip. The chip, intended to enhance
+    everyday life, malfunctions and forces shooter to believe he's living
+    reality as a former cop. The truth is, he's bed-bound and fighting to
+    escape a simulation. The corporate entity who designed the chip, Chart
+    Up Corp, is responsible for the malicious chip-malfunction, with the
+    goal of forcing advertisements throughout the simulation to embed
+    subconscious future spending habits into its victims. Some inhabitants
+    within the simulation are aware of the compromise of their brains, and
+    within this digital world that intertwines with consciousness, they
+    attempt to help shooter accept reality and to escape his fate.
+
+
+    1.2     The player explores a dark cyberpunk-themed world looking for
+    difficult to find pickups to include ammo, first-aid kits, and money to
+    boost survival odds, and fights off administrators to escape the
+    simulation.
+
+    1.3     When the player dies, they are re-awakened in their home and lose
+    their money. Chart Up Corp administrators, armed guards who
+    hunt down shooter, aim to kill the player so that the perpetual death loop
+    keeps them trapped within the simulation. The very long dream persists
+    until the company deems the mind-chip marketing programming is
+    complete, unless the player can end the simulation once and for all.
+
+
+2. Core Gameplay Loop
+
+    2.1     Explore the city to find pickups and cash.
+    2.2     Play mini-games to earn cash.
+    2.3     Fight off Chart Up Corp administrators.
+    2.4     Visit locations to purchase supplies.
+    2.5     Repeat until the player escapes the simulation or dies.
+
+3. Theme 
+
+    3.1     NES graphics with a cyberpunk look and feel. 
+    Dark, gritty, and centralizes around a neon-lit city with a grand 
+    casino—headquarters for Chart Up Corp. 
+
+
+4. Levels 
+
+    4.1     City
+
+        The centralized location where shooter must explore, fight, and 
+        learn how to escape his fate. 
+
+    4.2     Bank
+    
+        The financial district where shooter can deposit and withdraw 
+        virtual cash.
+
+    4.3     Shooting Range
+
+        A practice area where shooter can hone his shooting skills and 
+        earn cash prizes.
+
+        Three modes: Easy, Medium, Hard. Cash prizes commensurate with 
+        level of difficulty completed.
+
+    4.4     Casino
+    
+        Roulette and slots to win cash for buying supplies. 
+
+    4.5     Pawn Shop
+    
+        To purchase ammo and body armor. 
+
+    4.6     Hospital 
+
+        To purchase first-aid kits. 
+
+ 
+5. Requirements
+
+    5.1     Levels must be designed to emulate NES graphics and colors.
+    5.2     Player character must have walking and shooting animations.
+    5.3     Enemies must have walking and shooting animations.
+    5.4     A city level where the primary game takes place.
+    5.5     A bank level where the player can deposit and withdraw cash.
+    5.6     A shooting range level with three difficulty modes.
+    5.7     A casino level with roulette and slot machines.
+    5.8     A pawn shop level where the player can buy ammo and body armor
+    5.9     A hospital level where the player can buy first-aid kits.
+    5.10    Sound effects for walking, shooting, and item pickups.
+    5.11    Background music for each level.
+    5.12    A user interface displaying health, ammo, and cash.
+    5.13    A save/load system to preserve player progress.
+    5.14    An enemy AI system for Chart Up Corp administrators.
+    5.15    A death and respawn system that resets player cash upon death.
+    5.16    Entereable buildings for locations to grind for cash and items.
+    5.17    A final level to fighthordes of administrators to escape
+            the simulation.
+
+
+6. Lessons Learned
+
+    6.1     Underestimating NES Palette Limitations
+            Solely using the NES pallette makes blending and
+            smooth level design challenging. An alternative 
+            approach is to use fewer colors.
+    
